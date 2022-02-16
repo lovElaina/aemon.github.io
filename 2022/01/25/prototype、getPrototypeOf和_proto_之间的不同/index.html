@@ -16,21 +16,21 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This is my first article in hexo !Hello, nice to meet you, I am zyc. and I want to have a try123function test()&amp;#123;    console.log(&quot;Hello world!&quot;);&amp;#125; About me: Github Have fun!">
+    <meta name="description" content="# prototype、getPrototypeOf和_proto_之间的不同在学习JavaScript的过程中，原型是如何也绕不过去的一个知识点。虽然现在ES6已经非常普及，许多js的程序员都已经不再用原型的知识点来编写代码了，但是充分的理解原型也是很有必要的，尤其是在阅读他人优秀的js代码时，理解原型能帮助我们更好的理解早期代码。而原型包括三个访问器，这三个访问器有时功能重叠，所以准确的理解并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello,zyc">
-<meta property="og:url" content="http://example.com/2022/01/09/hello-zyc/index.html">
+<meta property="og:title" content="prototype、getPrototypeOf和_proto_之间的不同">
+<meta property="og:url" content="http://example.com/2022/01/25/prototype%E3%80%81getPrototypeOf%E5%92%8C_proto_%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%8D%E5%90%8C/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="This is my first article in hexo !Hello, nice to meet you, I am zyc. and I want to have a try123function test()&amp;#123;    console.log(&quot;Hello world!&quot;);&amp;#125; About me: Github Have fun!">
+<meta property="og:description" content="# prototype、getPrototypeOf和_proto_之间的不同在学习JavaScript的过程中，原型是如何也绕不过去的一个知识点。虽然现在ES6已经非常普及，许多js的程序员都已经不再用原型的知识点来编写代码了，但是充分的理解原型也是很有必要的，尤其是在阅读他人优秀的js代码时，理解原型能帮助我们更好的理解早期代码。而原型包括三个访问器，这三个访问器有时功能重叠，所以准确的理解并">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-09T07:47:50.000Z">
-<meta property="article:modified_time" content="2022-01-09T07:59:18.247Z">
+<meta property="article:published_time" content="2022-01-25T12:29:38.000Z">
+<meta property="article:modified_time" content="2022-02-16T09:55:27.765Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="first">
+<meta property="article:tag" content="prototype">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>hello,zyc - Aemon&#39;s World</title>
+  <title>prototype、getPrototypeOf和_proto_之间的不同 - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -176,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hello,zyc">
+            <span class="h2" id="subtitle" title="prototype、getPrototypeOf和_proto_之间的不同">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-09 15:47" pubdate>
-        2022年1月9日 下午
+      <time datetime="2022-01-25 20:29" pubdate>
+        2022年1月25日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      160 字
+      1.5k 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      13 分钟
     </span>
   
 
@@ -235,13 +235,30 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hello,zyc</h1>
+            <h1 style="display: none">prototype、getPrototypeOf和_proto_之间的不同</h1>
             
             <div class="markdown-body">
-              <p>This is my first article in hexo !<br>Hello, nice to meet you, I am zyc.</p>
-<h2 id="and-I-want-to-have-a-try"><a href="#and-I-want-to-have-a-try" class="headerlink" title="and I want to have a try"></a>and I want to have a try</h2><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello world!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>About me: <a target="_blank" rel="noopener" href="https://github.com/lovesatoriforever">Github</a></p>
-<h2 id="Have-fun"><a href="#Have-fun" class="headerlink" title="Have fun!"></a>Have fun!</h2>
+              <h3 id="prototype、getPrototypeOf和-proto-之间的不同"><a href="#prototype、getPrototypeOf和-proto-之间的不同" class="headerlink" title="# prototype、getPrototypeOf和_proto_之间的不同"></a># prototype、getPrototypeOf和_proto_之间的不同</h3><p>在学习JavaScript的过程中，原型是如何也绕不过去的一个知识点。虽然现在ES6已经非常普及，许多js的程序员都已经不再用原型的知识点来编写代码了，但是充分的理解原型也是很有必要的，尤其是在阅读他人优秀的js代码时，理解原型能帮助我们更好的理解早期代码。而原型包括三个访问器，这三个访问器有时功能重叠，所以准确的理解并区分他们还是很有必要的。</p>
+<p>这三个访问器就是<code>prototype</code>、<code>getPrototypeOf</code>和<code>__proto__</code>，从名字上可见这三个访问器都是对prototype这个单词做了一些变化，生成这样的属性方法名。为了测试这三个方法的输出，我们先来模拟创建一个存储用户数据User的类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">User</span>(<span class="hljs-params">name, passwordHash</span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = name;<br>  <span class="hljs-built_in">this</span>.passwordHash = passwordHash;<br>&#125;<br><br>User.prototype.toString = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;[User &#x27;</span> + <span class="hljs-built_in">this</span>.name + <span class="hljs-string">&#x27;]&#x27;</span>;<br>&#125;<br><br>User.prototype.checkPassword = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">password</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> hash(password) === <span class="hljs-built_in">this</span>.passwordHash;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里我们创建的这个User类的构造函数，接收两个参数，一个是用户名name，一个是密码的hash值，并且类中有两个方法<code>toString</code>以及<code>checkPassword</code>用来输出用户信息和检查密码。</p>
+<p>如果这个时候我们打印这三个原型方法的日志会得到一样的结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> u = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&#x27;Lix&#x27;</span>, <span class="hljs-string">&#x27;123456&#x27;</span>);<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(u)); <span class="hljs-comment">// User &#123; toString: [Function], checkPassword: [Function] &#125;</span><br><br><span class="hljs-built_in">console</span>.log(u.__proto__); <span class="hljs-comment">// User &#123; toString: [Function], checkPassword: [Function] &#125;</span><br><br><span class="hljs-built_in">console</span>.log(User.prototype); <span class="hljs-comment">// User &#123; toString: [Function], checkPassword: [Function] &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>既然他们的输出都一样，那么他们是否作用一样呢，我们可以来比较测试一下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">Object</span>.getPrototypeOf(u) === User.prototype; <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">u.__proto__ === User.prototype; <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<p>既然这两个方法都跟我们User对象的原型相等，那么这三个属性的区别究竟是什么呢？别急，接下来就把结论告诉大家。</p>
+<ul>
+<li><code>C.prototype</code>用于建立由 <code>new C()</code> 创建的对象的原型。</li>
+<li><code>Object.getPrototype(obj)</code>是ES5中用来获取obj对象的原型对象的标准方法。</li>
+<li><code>obj.__proto__</code>是获取obj对象的原型对象的非标准方法。</li>
+</ul>
+<p>所以一般我们是不会直接访问<code>C.prototype</code>去获取原型对象的，在ES5的环境中，我们使用<code>Object.getPrototype(obj)</code>来获取原型对象，而在不支持ES5的环境中，我们可以考虑用<code>__proto__</code>这样的非标准方法来当做权宜之计，希望各位不明白的同学能牢记这些区别。</p>
+
             </div>
             <hr>
             <div>
@@ -251,7 +268,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/first/">first</a>
+                      <a class="hover-with-bg" href="/tags/prototype/">prototype</a>
                     
                   </div>
                 
@@ -268,9 +285,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/10/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AFUI%E7%BB%84%E4%BB%B6%E5%BA%93/">
+                      <a href="/2022/02/02/javascript%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">新建文件夹——搭建前端UI组件库</span>
+                        <span class="hidden-mobile">javascript的垃圾回收机制</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,8 +295,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/09/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/01/18/CSS%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%B0%8F%E7%BB%86%E8%8A%82/">
+                        <span class="hidden-mobile">CSS类选择器的小细节</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

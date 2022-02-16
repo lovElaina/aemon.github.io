@@ -16,21 +16,23 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This is my first article in hexo !Hello, nice to meet you, I am zyc. and I want to have a try123function test()&amp;#123;    console.log(&quot;Hello world!&quot;);&amp;#125; About me: Github Have fun!">
+    <meta name="description" content="CSS类选择器的小细节1、我们看一个示例 1234567h1 &amp;#123;  color: blue;&amp;#125;..special &amp;#123;  color: blue;&amp;#125;  在上面的示例中，无效的类选择器 ..special 规则将被忽略，而 h1 仍会设置样式。 123h1, ..special &amp;#123;  color: blue;&amp;#125;  然而，上述例子所示，当组合在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello,zyc">
-<meta property="og:url" content="http://example.com/2022/01/09/hello-zyc/index.html">
+<meta property="og:title" content="CSS类选择器的小细节">
+<meta property="og:url" content="http://example.com/2022/01/18/CSS%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%B0%8F%E7%BB%86%E8%8A%82/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="This is my first article in hexo !Hello, nice to meet you, I am zyc. and I want to have a try123function test()&amp;#123;    console.log(&quot;Hello world!&quot;);&amp;#125; About me: Github Have fun!">
+<meta property="og:description" content="CSS类选择器的小细节1、我们看一个示例 1234567h1 &amp;#123;  color: blue;&amp;#125;..special &amp;#123;  color: blue;&amp;#125;  在上面的示例中，无效的类选择器 ..special 规则将被忽略，而 h1 仍会设置样式。 123h1, ..special &amp;#123;  color: blue;&amp;#125;  然而，上述例子所示，当组合在">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-09T07:47:50.000Z">
-<meta property="article:modified_time" content="2022-01-09T07:59:18.247Z">
+<meta property="og:image" content="http://example.com/img/css-first.jpg">
+<meta property="article:published_time" content="2022-01-18T15:59:41.000Z">
+<meta property="article:modified_time" content="2022-01-18T16:00:03.078Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="first">
+<meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/css-first.jpg">
   
   
-  <title>hello,zyc - Aemon&#39;s World</title>
+  <title>CSS类选择器的小细节 - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -176,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hello,zyc">
+            <span class="h2" id="subtitle" title="CSS类选择器的小细节">
               
             </span>
 
@@ -186,8 +188,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-09 15:47" pubdate>
-        2022年1月9日 下午
+      <time datetime="2022-01-18 23:59" pubdate>
+        2022年1月18日 晚上
       </time>
     </span>
   
@@ -197,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      160 字
+      737 字
     </span>
   
 
@@ -206,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      7 分钟
     </span>
   
 
@@ -235,13 +237,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hello,zyc</h1>
+            <h1 style="display: none">CSS类选择器的小细节</h1>
             
             <div class="markdown-body">
-              <p>This is my first article in hexo !<br>Hello, nice to meet you, I am zyc.</p>
-<h2 id="and-I-want-to-have-a-try"><a href="#and-I-want-to-have-a-try" class="headerlink" title="and I want to have a try"></a>and I want to have a try</h2><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello world!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>About me: <a target="_blank" rel="noopener" href="https://github.com/lovesatoriforever">Github</a></p>
-<h2 id="Have-fun"><a href="#Have-fun" class="headerlink" title="Have fun!"></a>Have fun!</h2>
+              <h3 id="CSS类选择器的小细节"><a href="#CSS类选择器的小细节" class="headerlink" title="CSS类选择器的小细节"></a>CSS类选择器的小细节</h3><p><strong>1、我们看一个示例</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br><br>.<span class="hljs-selector-class">.special</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在上面的示例中，无效的类选择器 <code>..special</code> 规则将被忽略，而 <code>h1</code> 仍会设置样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span>, .<span class="hljs-selector-class">.special</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然而，上述例子所示，当组合在一起时， <code>h1</code> 由于整个规则被认为是无效的，因此和类都不会被设置样式，即这整个代码块都是无效的。</p>
+<p><strong>2、属性选择器</strong></p>
+<p>属性选择器选择器提供了基于元素上某个属性的存在来选择元素的不同方法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[title]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>或者甚至根据具有特定值的属性的存在进行选择：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[href=<span class="hljs-string">&quot;https://example.com&quot;</span>]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>3、伪类和伪元素</strong></p>
+<p>伪类，例如，<code>:hover</code>伪类仅在鼠标指针悬停时选择元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
+
+<p>伪元素选择元素的某个部分而不是元素本身。例如，<code>::first-line</code>始终选择元素内的第一行文本</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::first-line</span> &#123;<br>    <span class="hljs-attribute">color</span>: blue;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>此时p标签的第一行文字为蓝色，其他部分颜色默认。</p>
+<p><strong>4、::first-of-type</strong></p>
+<p> <code>first-of-type</code> 表示一组兄弟元素中其类型的第一个元素。</p>
+<p>例如HTML：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Heading<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Paragraph 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Paragraph 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>CSS：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:first</span>-of-type &#123;<br>  <span class="hljs-attribute">color</span>: red;<br>  <span class="hljs-attribute">font-style</span>: italic;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="/img/css-first.jpg" srcset="/img/loading.gif" lazyload alt="result"></p>
+
             </div>
             <hr>
             <div>
@@ -251,7 +282,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/first/">first</a>
+                      <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
                     
                   </div>
                 
@@ -268,9 +299,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/10/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AFUI%E7%BB%84%E4%BB%B6%E5%BA%93/">
+                      <a href="/2022/01/25/prototype%E3%80%81getPrototypeOf%E5%92%8C_proto_%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%8D%E5%90%8C/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">新建文件夹——搭建前端UI组件库</span>
+                        <span class="hidden-mobile">prototype、getPrototypeOf和_proto_之间的不同</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,8 +309,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/09/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/01/17/Object%E7%9A%84Create()%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">Object的Create()方法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

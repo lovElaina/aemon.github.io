@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>js 短路运算符</title>
+    <link href="/2022/02/18/js%20%E7%9F%AD%E8%B7%AF%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <url>/2022/02/18/js%20%E7%9F%AD%E8%B7%AF%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    
+    <content type="html"><![CDATA[<h3 id="js-短路运算符"><a href="#js-短路运算符" class="headerlink" title="js 短路运算符"></a>js 短路运算符</h3><ul><li><h2 id="amp-amp-和-也叫短路运算符"><a href="#amp-amp-和-也叫短路运算符" class="headerlink" title="&amp;&amp; 和 || 也叫短路运算符"></a>&amp;&amp; 和 || 也叫短路运算符</h2></li><li><p><strong>短路&amp;&amp;： 只要碰到了假值(false)，就会短路，并返回该假值， 只要短路，不会继续执行后面的表达式。</strong></p></li><li><p><strong>短路||： 只要碰到了真值(true)，就会短路，并返回该真值， 只要短路，不会继续执行后面的表达式。</strong></p><p><strong>1、只要“||”前面为false,不管“||”后面是true还是false，都返回“||”后面的值。<br>2、只要“&amp;&amp;”前面是false，无论“&amp;&amp;”后面是true还是false，结果都将返“&amp;&amp;”前面的值;<br>3、只要“||”前面为true,不管“||”后面是true还是false，都返回“||”前面的值。<br>4、只要“&amp;&amp;”前面是true，无论“&amp;&amp;”后面是true还是false，结果都将返“&amp;&amp;”后面的值;</strong></p></li></ul><p>    注意：假值有以下6个：<br>    null undefined NaN false 0 ’ ’</p><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;abc&#x27;</span> &amp;&amp; <span class="hljs-literal">null</span>); <span class="hljs-comment">// null</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-string">&#x27;abc&#x27;</span>); <span class="hljs-comment">// null</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// null</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">undefined</span> &amp;&amp; <span class="hljs-literal">null</span>); <span class="hljs-comment">// undefined</span><br></code></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">true</span> || <span class="hljs-literal">false</span>); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">NaN</span> || <span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;abc&#x27;</span> || <span class="hljs-number">123</span>); <span class="hljs-comment">// ‘abc’</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-number">0</span> || <span class="hljs-string">&#x27;&#x27;</span>); <span class="hljs-comment">// &#x27;&#x27;</span><br></code></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br> <span class="hljs-comment">// 真值短路</span><br> <span class="hljs-comment">// 短路或 || 经常用来设置函数参数的默认值</span><br> a = a || <span class="hljs-number">0</span>;<br> b = b || <span class="hljs-number">0</span>;<br> <span class="hljs-built_in">console</span>.log(a + b);<br> &#125;<br>add(); <span class="hljs-comment">// 0</span><br>add(<span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span><br>add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// 3</span><br>add(<span class="hljs-number">100</span>, <span class="hljs-number">200</span>); <span class="hljs-comment">// 300</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>js</tag>
+      
+      <tag>短路运算符</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>作用域链(Scope Chain)</title>
     <link href="/2022/02/06/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE(Scope%20Chain)/"/>
     <url>/2022/02/06/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE(Scope%20Chain)/</url>

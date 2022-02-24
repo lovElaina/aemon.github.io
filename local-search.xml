@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>小程序用户信息接口调整的应对方法</title>
+    <link href="/2022/02/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3%E8%B0%83%E6%95%B4%E7%9A%84%E5%BA%94%E5%AF%B9%E6%96%B9%E6%B3%95/"/>
+    <url>/2022/02/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3%E8%B0%83%E6%95%B4%E7%9A%84%E5%BA%94%E5%AF%B9%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h3 id="小程序用户信息接口调整的应对方法"><a href="#小程序用户信息接口调整的应对方法" class="headerlink" title="小程序用户信息接口调整的应对方法"></a>小程序用户信息接口调整的应对方法</h3><blockquote><p>为进一步规范开发者调用用户信息相关接口或功能，提升用户体验，平台将对部分用户信息相关功能及接口进行调整，具体如下：</p><p> <open-data>组件功能调整</p><p>开发者在未获取用户明示同意的情况下通过 <open-data>组件 在小程序中展示用户个人信息，用户容易误以为自己的个人信息在未授权的情况下，被小程序获取。平台计划<strong>从2022年2月21日24时起回收通过<open-data>展示个人信息的能力</strong>，若小程序需收集用户昵称头像等信息，可以通过 头像昵称填写功能功能进行收集。具体回收方式为：</p><ol><li>头像展示为灰色头像</li><li>用户昵称展示“微信用户”</li><li>用户性别、地区、语言展示为为空（“”）</li></ol><p>小程序通过<open-data>展示群名称能力保留，平台会针对小程序生命周期内首次调用该组件展示群名称向用户提示：“群名称仅你可见，小程序无法获取。”</p></blockquote><p><img src="/img/tx.gif" alt="腾讯 (ˉ▽ˉ；)..."></p><p>直接上代码吧</p><p>调整前：</p><figure class="highlight html"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;my_logo&quot;</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;openid!=&#x27;&#x27;&#125;&#125;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;my_logo_pho&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">open-data</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;userAvatarUrl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">open-data</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;my_logo_text&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">open-data</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;userNickName&quot;</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh_CN&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;user_name&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">open-data</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;my_logo&quot;</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;openid==&#x27;&#x27;&#125;&#125;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;top_title&quot;</span>&gt;</span>you have not log<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">bindtap</span>=<span class="hljs-string">&quot;getopenid&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;default&quot;</span>&gt;</span>log<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure><p>调整后：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>小程序</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>export 和 export default 的区别</title>
     <link href="/2022/02/22/export%20%E5%92%8C%20export%20default%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <url>/2022/02/22/export%20%E5%92%8C%20export%20default%20%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
@@ -15,6 +34,25 @@
     <tags>
       
       <tag>js</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Taro-React框架的生命周期函数</title>
+    <link href="/2022/02/21/Taro-React%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0/"/>
+    <url>/2022/02/21/Taro-React%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Taro-React框架的生命周期函数"><a href="#Taro-React框架的生命周期函数" class="headerlink" title="Taro-React框架的生命周期函数"></a>Taro-React框架的生命周期函数</h3><p>        最近接到一个小程序项目，考虑再三，决定使用Taro完成，主要的理由是，Taro支持React/Vue/Nerv 等框架来开发微信 、京东、百度、支付宝、字节、qq、飞书等小程序，以及H5、RN 等应用，可以做到一次编写，处处运行。</p><p>        官网的说法是这样的：</p><blockquote><p>现如今市面上端的形态多种多样，Web、React Native、微信小程序等各种端大行其道。当业务要求同时在不同的端都要求有所表现的时候，针对不同的端去编写多套代码的成本显然非常高，这时候只编写一套代码就能够适配到多端的能力就显得极为需要。</p></blockquote><p>        于是我们愉快地开始了Taro的学习，无论学哪个框架，其中生命周期都是绕不开的地方，在Taro中，我们可以无障碍地直接使用小程序的生命周期，但在此基础上，Taro也新增了一系列的生命周期方法。</p><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; View &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>  <span class="hljs-comment">// 可以使用所有的 React 生命周期方法</span><br><br>  componentWillMount () &#123;&#125;<br><br>  componentDidMount () &#123;&#125;<br><br>  <span class="hljs-comment">// onLoad</span><br>  onLoad () &#123;&#125;<br><br>  <span class="hljs-comment">// onReady</span><br>  onReady () &#123;&#125;<br><br>  <span class="hljs-comment">// 对应 onShow</span><br>  componentDidShow () &#123;&#125;<br><br>  <span class="hljs-comment">// 对应 onHide</span><br>  componentDidHide () &#123;&#125;<br><br>  <span class="hljs-comment">// 对应 onPullDownRefresh，除了 componentDidShow/componentDidHide 之外，</span><br>  <span class="hljs-comment">// 所有页面生命周期函数名都与小程序相对应</span><br>  onPullDownRefresh () &#123;&#125;<br><br>  render () &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span> /&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Index<br></code></pre></td></tr></table></figure><p>这些方法的顺序，经过测试如下：componentWillMount——componentDidMount——onLoad——componentDidShow——onReady。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Taro</tag>
       
     </tags>
     

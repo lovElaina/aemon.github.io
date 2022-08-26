@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Aemon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JIT-使用JAVA实现一个简单的Git        参考git实现原理，我用Java实现了一个版本控制系统，并将它命名为jit。它可以看作是git的简化版本，与git相比，保留了核心的功能集，类似于git的最初发布版本，目前暂未实现git pull以及git push等需要网络连接的功能。项目已上传至github上，项目地址是：https:&#x2F;&#x2F;github.com&#x2F;lovElaina&#x2F;jit。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JIT-使用JAVA实现一个简单的Git">
+<meta property="og:url" content="http://example.com/2022/04/12/JIT-%E4%BD%BF%E7%94%A8JAVA%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Git/index.html">
+<meta property="og:site_name" content="Aemon&#39;s World">
+<meta property="og:description" content="JIT-使用JAVA实现一个简单的Git        参考git实现原理，我用Java实现了一个版本控制系统，并将它命名为jit。它可以看作是git的简化版本，与git相比，保留了核心的功能集，类似于git的最初发布版本，目前暂未实现git pull以及git push等需要网络连接的功能。项目已上传至github上，项目地址是：https:&#x2F;&#x2F;github.com&#x2F;lovElaina&#x2F;jit。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/java1.png">
+<meta property="og:image" content="http://example.com/img/java2.png">
+<meta property="og:image" content="http://example.com/img/java3.png">
+<meta property="og:image" content="http://example.com/img/java4.png">
+<meta property="og:image" content="http://example.com/img/java5.png">
+<meta property="og:image" content="http://example.com/img/java6.png">
+<meta property="og:image" content="http://example.com/img/java7.png">
+<meta property="og:image" content="http://example.com/img/java8.png">
+<meta property="og:image" content="http://example.com/img/java9.png">
+<meta property="og:image" content="http://example.com/img/java10.png">
+<meta property="og:image" content="http://example.com/img/java11.png">
+<meta property="og:image" content="http://example.com/img/java12.png">
+<meta property="og:image" content="http://example.com/img/java13.png">
+<meta property="og:image" content="http://example.com/img/java14.png">
+<meta property="og:image" content="http://example.com/img/java15.png">
+<meta property="og:image" content="http://example.com/img/java16.png">
+<meta property="og:image" content="http://example.com/img/java17.png">
+<meta property="og:image" content="http://example.com/img/java18.png">
+<meta property="og:image" content="http://example.com/img/java19.png">
+<meta property="og:image" content="http://example.com/img/java20.png">
+<meta property="og:image" content="http://example.com/img/java21.png">
+<meta property="og:image" content="http://example.com/img/java22.png">
+<meta property="og:image" content="http://example.com/img/java23.png">
+<meta property="og:image" content="http://example.com/img/java24.png">
+<meta property="og:image" content="http://example.com/img/java25.png">
+<meta property="og:image" content="http://example.com/img/java26.png">
+<meta property="og:image" content="http://example.com/img/java27.png">
+<meta property="og:image" content="http://example.com/img/java28.png">
+<meta property="og:image" content="http://example.com/img/java29.png">
+<meta property="og:image" content="http://example.com/img/java30.png">
+<meta property="og:image" content="http://example.com/img/java31.png">
+<meta property="og:image" content="http://example.com/img/java32.png">
+<meta property="og:image" content="http://example.com/img/java33.png">
+<meta property="og:image" content="http://example.com/img/java34.png">
+<meta property="og:image" content="http://example.com/img/java35.png">
+<meta property="og:image" content="http://example.com/img/java36.png">
+<meta property="og:image" content="http://example.com/img/java37.png">
+<meta property="og:image" content="http://example.com/img/java38.png">
+<meta property="og:image" content="http://example.com/img/java39.png">
+<meta property="og:image" content="http://example.com/img/java40.png">
+<meta property="og:image" content="http://example.com/img/java41.png">
+<meta property="og:image" content="http://example.com/img/java42.png">
+<meta property="og:image" content="http://example.com/img/java43.png">
+<meta property="og:image" content="http://example.com/img/java44.png">
+<meta property="og:image" content="http://example.com/img/java45.png">
+<meta property="og:image" content="http://example.com/img/java46.png">
+<meta property="og:image" content="http://example.com/img/java47.png">
+<meta property="og:image" content="http://example.com/img/java48.png">
+<meta property="og:image" content="http://example.com/img/java49.png">
+<meta property="og:image" content="http://example.com/img/java50.png">
+<meta property="og:image" content="http://example.com/img/java51.png">
+<meta property="og:image" content="http://example.com/img/java52.png">
+<meta property="og:image" content="http://example.com/img/java53.png">
+<meta property="og:image" content="http://example.com/img/java54.png">
+<meta property="og:image" content="http://example.com/img/java55.png">
+<meta property="article:published_time" content="2022-04-12T02:35:21.000Z">
+<meta property="article:modified_time" content="2022-08-26T04:07:50.011Z">
+<meta property="article:author" content="Aemon">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/java1.png">
+  
+  
+  <title>JIT-使用JAVA实现一个简单的Git - Aemon&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Aemon&#39;s World</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JIT-使用JAVA实现一个简单的Git">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-12 10:35" pubdate>
+        2022年4月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      74 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JIT-使用JAVA实现一个简单的Git</h1>
+            
+            <div class="markdown-body">
+              <h3 id="JIT-使用JAVA实现一个简单的Git"><a href="#JIT-使用JAVA实现一个简单的Git" class="headerlink" title="JIT-使用JAVA实现一个简单的Git"></a>JIT-使用JAVA实现一个简单的Git</h3><p>        参考git实现原理，我用Java实现了一个版本控制系统，并将它命名为jit。它可以看作是git的简化版本，与git相比，保留了核心的功能集，类似于git的最初发布版本，目前暂未实现git pull以及git push等需要网络连接的功能。项目已上传至github上，项目地址是：<a target="_blank" rel="noopener" href="https://github.com/lovElaina/jit%E3%80%82">https://github.com/lovElaina/jit。</a><br>        项目遵循统一的编程风格以及注释风格，参考git实现原理和文件结构，使用key-value object实现blob，tree，commit的核心存储结构，实现了init，branch，checkout，add，rm，commit等基本功能，除此之外也实现了reset、log、restore、load等其他功能，使整个项目更完善，初步具备可用性。<br>        实现了两种运行方式，分别为：以命令行窗口模式运行，和以图形界面形式运行，对应两个入口函数，以满足不同使用习惯的用户需求。同时还提供了完备的帮助指令，让用户在键入错误的情况下能得到充足而有可行性的提示信息。<br>        项目依赖的Java版本为JDK1.8，使用intellij idea作为开发环境。由于属于轻量级应用，项目规模较小，故没有采用Gradle等构建工具，也没有使用第三方库（图形化界面使用swing框架，属于java内置的窗口工具包），最终的成品经idea打包后，使用exe4j从jar转为exe可执行文件，支持运行windows xp及以上版本的操作系统中。</p>
+<h2 id="项目原理"><a href="#项目原理" class="headerlink" title="项目原理"></a>项目原理</h2><p>        从本质上来说，Jit是一组文件操作过程的集合。其底层操作为：文件及文件夹的创建、读取、写入、删除，各种复杂的上层操作，例如add、commit、checkout等，都是由这四类底层操作加上合适的数据结构和文件系统所实现。Jit可以在创建复杂的项目时，或在项目上与其他人协作时为我们提供帮助。我们能够使用Jit commit定期保存项目的版本。如果在以后的某个时间点不小心弄乱了代码，则可以使用git checkout将代码恢复到以前提交的版本，并且不会丢失此后所做的任何更改。<br>        Jit是一个内容寻址的简单文件系统，这意味着Jit 的核心部分是一个简单的键值对（key-value）存储库。 我们可以向Jit仓库中添加任意类型的内容。<br>        Jit和Git类似，都区分了几种不同类型的对象。分别是Blob（本质上是文件的内容），Tree（对 blob 和其他tree即子目录的引用，每个tree维护一张存放Blob和Tree条目的表），commits（日志消息、其他元数据如提交日期、作者、对树的引用和对父提交的引用等的引用）。<br>        每个对象（每个 blob 、每个tree和每个commit）都有一个唯一的40位16进制数，即哈希后得到的id，作为对对象的引用，与典型的实现不同，具有完全相同内容的两个对象在所有系统上将具有相同的 id。比如就 Blob 而言，“相同的内容”意味着相同的文件内容。</p>
+<p><img src="/img/java1.png" srcset="/img/loading.gif" lazyload alt="Blob、Tree、Commit对象的内部结构"><br>        Git 和 Jit 都以相同的方式完成哈希操作：通过使用称为 SHA-1的加密哈希函数完成，它为数据存储在.Jit 目录中提供了一个方便的文件名。还提供了一种方便的方法来比较两个文件（blob）以查看它们是否具有相同的内容：如果它们的 SHA-1 相同，我们就可以假设文件相同。<br>        基于上述讨论，我们可以向Jit仓库中添加任意类型的内容。如果添加的是文件，则它会被压缩存储在一个保存在object目录下的文件中，而文件名是经过对文件内容经过哈希运算得到的40位16进制数（这点与Git存在差别，在Git中，哈希运算得到的40位中，前两位作为文件夹名存放在objcet目录下，后38位作为文件名存放在其对应的前两位文件夹下，可以看到这里采用了简化的处理方式）。不仅如此，还会添加这个文件的信息到暂存区（Index）中。<br>如果添加的是文件夹，则Jit会递归遍历该文件夹中的所有文件，并类似地，把他们全部作为blob对象存储，注意：只有在commit时，才会从Index文件中生成树。<br>        另外，branch部分也是重要的组成部分，Jit的分支，其实本质上仅仅是指向提交对象的可变指针。 Git 的默认分支名字是 master。 在多次提交操作之后，已经有一个指向最后那个提交对象的 master 分支。 master 分支会在每次提交时自动向前移动。<br>        由于Jit的分支实质上仅是包含所指对象校验和（长度为 40 的 SHA-1 值字符串）的文件，所以它的创建和销毁都非常高效。 创建一个新分支就相当于往一个文件中写入 41 个字节（40 个字符和 1 个换行符）。<br>        这也是Git中的默认实现，与以往其他大多数版本控制系统不同，它们在创建分支时，将所有的项目文件都复制一遍，并保存到一个特定的目录。完成这样繁琐的过程通常需要好几秒钟，有时甚至需要好几分钟。所需时间的长短，完全取决于项目的规模。而在Jit以及Git中，任何规模的项目都能在瞬间创建新分支。 同时，由于每次提交都会记录父对象，所以寻找共同祖先也是同样的简单和高效。 这些高效的特性使得我们鼓励用户频繁地创建和使用分支。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>        我对项目进行了部分重构，使之更符合面向对象方法学要求。<br>        Jit项目有7个包，每个包都是特定的一类操作的集合，这些包分别是：branch（存放与分支有关的数据源类）、core（存放主要命令对应的操作类，例如JitInit、JitAdd、JitCommit等）、Diff（存放差异算法的实现类）、gitobject（存放与Object对象有关的数据源类，例如GitObject抽象类、Blob、Tree、Commit类等）repo（存放repository类，之所以把它单独拿出来放在一个包中，是因为它和branch一样，都有着独特的操作和含义，与其他任何包所覆盖的范围都不同），tmp（存放与Index有关的类、commit过程中产生的虚拟节点，因为它们都是临时性质的，所以命名位tmp），utils（包含全局且常用的操作类，例如FileCreation类定义了文件创建方法、FileDeletion类定义了文件删除方法、SHA1类定义了哈希方法，Utils类定义了读取、设置工作路径和文本信息的方法。<br><img src="/img/java2.png" srcset="/img/loading.gif" lazyload><br><img src="/img/java3.png" srcset="/img/loading.gif" lazyload><br>        上两张图包含了Jit项目中的所有类，还有每个类对应的属性和方法。</p>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><p>        这一节我会介绍Jit项目的各个类中包含的主要属性方法，并对各类与整体之间的关系及作用分别加以说明。</p>
+<h1 id="Client类"><a href="#Client类" class="headerlink" title="Client类"></a>Client类</h1><p>        这是Jit命令行程序的入口类，从main函数进入，main函数循环取得键入指令，并将指令字符串通过str.split转为字符串数组，对数组中的值进行判断，例如如果arr[1]的值等于”init”，就执行jit init。类中的各方法分别对应相关的指令，当输入”jit init” 时，会执行jit Init方法，输入”jit add xxx”时，会执行jit add方法将xxx序列化为blob文件并将这条记录添加到index文件，输入”jit commit”时，会执行jit commit方法，输入”jit remove”时，会执行jit remove方法，根据后缀参数，在index文件中移除file对应的文件记录，或强制删除files（既删除index中对应的记录），又删除本地工作区文件输入”jit log”时，会执行jit log方法，从当前HEAD指向的commit打印历史commit记录，输入”jit reset”时，根据后缀参数不同，或重置到最近一次提交，只重置暂存区，或同时重置工作区和暂存区的文件，输入”jit branch”时，根据后缀参数不同，执行分支创建、删除等相关操作，输入”jit checkout”时，执行分支切换操作，输入”jit restore”时，会会撤销文件的修改，使暂存区的文件恢复到工作区，即最近一次执行完jit add的状态（注意：没有放入暂存区的文件会消失）。<br><img src="/img/java4.png" srcset="/img/loading.gif" lazyload><br>        上图是Client类中的所有方法列表。概括来说，它是根据输入字符串不同，寻找匹配的方法并执行，而每个匹配的方法中又对应了更详细的操作流程，例如JitInit类中的init方法，它首先更具传入的工作目录创建仓库对象，如果仓库已存在，则打印提示信息，否则建立使用仓库类中的createRepo方法创建本地仓库，可以看到这些操作类是链接输入输出和数据类的纽带，整个项目为MVC模型，操作类属于Controller，即控制器部分，而调用它的Client类中的各种方法，属于View，即视图层，其他分散在各个包中的类，（例如repo包中的Repository类、branch包中的Branch类、gitobject包中的Tree、Blob、Commit等类）属于Model，即数据模型层。<br><img src="/img/java5.png" srcset="/img/loading.gif" lazyload><br>接下来我会对各个Controller层的类进行详细介绍（即位于core包中的以Jit开头的所有类）</p>
+<h1 id="JitAdd类"><a href="#JitAdd类" class="headerlink" title="JitAdd类"></a>JitAdd类</h1><p>        功能上实现了两个部分，分别是添加文件对象到暂存区中，如果缓存区中有和待添加文件同名的记录，则按时间顺序更新（后加入的必然替换先前存在的），同时会创建一个blob对象，并使用compressWrite方法序列化到Object目录下的文件中。</p>
+<p><img src="/img/java6.png" srcset="/img/loading.gif" lazyload><br>        文件内容经过ZLibUtils的compress方法压缩，如下图所示：<br><img src="/img/java7.png" srcset="/img/loading.gif" lazyload><br>        此外，如果jit add添加的是一个文件夹，则使用file类的listFiles列出文件夹中存在的所有文件，并分别递归调用add方法，直到文件夹中的所有文件全部被添加到Index中。</p>
+<h1 id="JitCommit类"><a href="#JitCommit类" class="headerlink" title="JitCommit类"></a>JitCommit类</h1><p>        是执行commit的操作类，结构如下图所示。</p>
+<p><img src="/img/java8.png" srcset="/img/loading.gif" lazyload><br>        功能上分为三个部分，分别是：<br>        （1）创建commit对象并保存到repository，并且把commit的key写入branch文件<br><img src="/img/java9.png" srcset="/img/loading.gif" lazyload><br>        （2）更新branch，把commit key信息写入refs/heads中<br><img src="/img/java10.png" srcset="/img/loading.gif" lazyload><br>        （3）从现有的index文件中创建indexTree对象<br><img src="/img/java11.png" srcset="/img/loading.gif" lazyload><br>    这里使用了TreeMap作为数据结构，存储的键值对分别为String型和ObjectNode型，其中ObjectNode是自定义的虚拟节点类，所以buildIndexTree方法是根据Index中存储的记录产生虚拟节点的过程，ArrayList&lt;String[]&gt; idxList = idxObject.getIndexs();定义一个类型为String数组的ArrayList，它接收之前创建的Index对象中的index属性，注意两者并不等同，如下图所示为index的类型。<br><img src="/img/java12.png" srcset="/img/loading.gif" lazyload><br>    而getIndexs方法返回这个index，即它是一层封装，避免对象中的方法名被通过对象名.方法名的方式直接调用。<br>    得到存储Index记录的idexList后再循环遍历idxList，找到每个元素的path，即文件路径，这里使用Array.asList方法，逐级对路径进行拆分，并定义另外一个List类型的变量splitedPath存放，接下来遍历splitedPath，如果位于同一层级之下已经有指定的路径，则cur指向内层，否则在cur的当前层级下存放键值对，键为当前路径名，值为新创建的ObjectNode对象，如下图所示。<br><img src="/img/java13.png" srcset="/img/loading.gif" lazyload><br>    bulidTree方法用当前的虚拟结点中的数据创建树对象，虽然代码比较简短，却是最重要的一步。Tree的构造方法在下一节会提到。<br><img src="/img/java14.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="JitBranch类"><a href="#JitBranch类" class="headerlink" title="JitBranch类"></a>JitBranch类</h1><p>        定义对于分支的一系列操作，类中包含如下方法：</p>
+<p><img src="/img/java15.png" srcset="/img/loading.gif" lazyload><br>    其中getBranch方法得到HEAD中存放的branch路径，例如：ref: refs/heads/master，substring(16)就是master，并返回由它得到的branch对象。<br><img src="/img/java16.png" srcset="/img/loading.gif" lazyload><br>    branchExist方法判断分支名所对应的分支文件是否存在，若存在返回true<br><img src="/img/java17.png" srcset="/img/loading.gif" lazyload><br>    branchAdd方法创建一个新的branch并且把这个branch文件添加到refs/heads文件夹<br><img src="/img/java18.png" srcset="/img/loading.gif" lazyload><br>    而branch方法列出所有现存的分支名，如果在执行这个方法之前调用了deleteBranch方法删除了一个分支，则不显示被删除的分支名。<br><img src="/img/java19.png" srcset="/img/loading.gif" lazyload><br>    注意：如果master分支还不存在，则会收到提示信息“master分支不存在，你应该至少先提交一次”，另外，从HEAD文件中读取的branch名和refs/heads中的branch文件名相同时，表示是当前分支，当前分支需要在分支名前面加上*号。<br>    createBranchWithMaster方法在master分支所指向的位置处创建一个新分支，同样地，如果master分支不存在，则会收到提示信息“master分支不存在，你应该至少先提交一次”。<br><img src="/img/java20.png" srcset="/img/loading.gif" lazyload><br>    deleteBranch方法传入String类型的分支名，然后删除这个分支名对应的分支，其实质是删除项目当前目录.jit\refs\heads中的分支名对应的文件<br><img src="/img/java21.png" srcset="/img/loading.gif" lazyload><br>    如上图所示，如果执行deleteBranch(test)，则会删除该文件。顺带一提，每个分支文件中保存着这个分支当前指向的commit Key，例如上图中的master分支内容如下<br><img src="/img/java22.png" srcset="/img/loading.gif" lazyload><br>    注意：在删除分支之前，需要确保1、希望删除的分支名是现存的。2、删除的分支不是当前分支（否则程序不知道你现在应该指向哪个位置，程序不能随机指派一个分支以供切换，尤其是只有一个分支的时候，删除的一定是当前分支，这时指针指向为空，会产生严重错误。<br>    遵循上述讨论，删除分支的代码如上图所示。</p>
+<h1 id="JitCheckout类"><a href="#JitCheckout类" class="headerlink" title="JitCheckout类"></a>JitCheckout类</h1><p>        用于实现切换分支的操作类，类结构如下图所示：</p>
+<p><img src="/img/java23.png" srcset="/img/loading.gif" lazyload><br>    其中path方法为存放各分支文件的heads文件夹路径，定义如下：<br>    static String path = Utils.getJitDir() + File.separator + “refs” + File.separator + “heads”;<br>    branExist方法确定位于refs/heads，且名为branchNames的分支文件是否存在<br><img src="/img/java24.png" srcset="/img/loading.gif" lazyload><br>    checkOut方法切换到名为branchName的分支，它比changeHead方法多了一个条件判断<br><img src="/img/java25.png" srcset="/img/loading.gif" lazyload><br>    由于checkout不仅切换分支，还会切换到分支所在的文件状态，例如分支master中有文件aa.txt、bb.txt,而分支hotfix中只有文件aa.txt，则从master分支切换到hotfix分支时，会删除bb.txt，这里涉及到一组操作：删除当前工作目录的所有文件，并通过传入的分支名切换到该分支，即改变HEAD文件中的分支名（HEAD文件相当于指针，指向最近操作的分支名）代码如下：<br><img src="/img/java26.png" srcset="/img/loading.gif" lazyload><br>    然后由分支名获取到新分支的对象，再通过分支中保存的commitKey获取到commit对象，再由Commit类中的getTree方法获取到树对象，通过FileCreation中的recoverWorkTree方法恢复树对应的所有文件。<br><img src="/img/java27.png" srcset="/img/loading.gif" lazyload><br>    最后，还要恢复Index文件中的记录到指定的branch中保存的状态，这个过程也分为两步，第一步删除当前Index文件中的所有记录，第二部把当前所有的工作区文件（此时已经切换到新分支名所对应的工作区了）的文件记录都添加到index中。<br><img src="/img/java28.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="JitLog类"><a href="#JitLog类" class="headerlink" title="JitLog类"></a>JitLog类</h1><p>        JitLog类只包含一个printLog方法，即打印输出当前branch所指向的commit记录，并向上追溯一直到父commit为空。</p>
+<p><img src="/img/java29.png" srcset="/img/loading.gif" lazyload><br>    由于频繁涉及字符串的拼接操作，所以使用stringBuilder类，因为和 String 类不同，StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象，所以既提高了效率，又节省了空间。首先通过Branch currentBranch = getBranch();方法得到当前的Branch对象，从branch中的getCommitKey方法中取得commit对象的key，然后由key构造commit对象，打印其对应的value值，然后由getparent方法得到它的父提交对象的commit key，如果不为null，则循环整个过程，打印输出的结果如下所示：<br><img src="/img/java30.png" srcset="/img/loading.gif" lazyload><br>    打印顺序是从当前commit出发一直到最初（parent为null）的commit。</p>
+<h1 id="JitReset类"><a href="#JitReset类" class="headerlink" title="JitReset类"></a>JitReset类</h1><p>        作用是重置到某次提交的状态，根据输入参数不同，可以选择只重置暂存区，或同时重置暂存区和工作区。<br>        重置到最近一次提交，只重置暂存区</p>
+<p><img src="/img/java31.png" srcset="/img/loading.gif" lazyload><br>    重置到特定的提交（commitKey），只重置暂存区<br><img src="/img/java32.png" srcset="/img/loading.gif" lazyload><br>    重置到特定的提交（commitKey），工作区和暂存区的文件也同步重置<br><img src="/img/java33.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="JitRestore类"><a href="#JitRestore类" class="headerlink" title="JitRestore类"></a>JitRestore类</h1><p>        这是我额外加入的功能，它会撤销文件的修改，使暂存区的文件恢复到工作区，即最近一次执行完jit add的状态。</p>
+<p><img src="/img/java34.png" srcset="/img/loading.gif" lazyload><br>    它首先执行文件删除，把工作区的所有文件删除，保留.jit文件夹，然后从Index文件中获取数据到ArrayList中，恢复为工作区文件。</p>
+<h1 id="JitRem类"><a href="#JitRem类" class="headerlink" title="JitRem类"></a>JitRem类</h1><p>        即JitRemove的功能，实现两种方法：在index文件中移除file对应的文件记录或强制删除files，既删除index中对应的记录，又删除本地工作区文件，代码如下所示：</p>
+<p><img src="/img/java35.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="GitObject类"><a href="#GitObject类" class="headerlink" title="GitObject类"></a>GitObject类</h1><p>        从这里开始往后介绍的，都属于数据源类，GitObjcet我将它定义为抽象类，后面的Blob、Tree和Commit类，都继承自它。结构如下所示：</p>
+<p><img src="/img/java36.png" srcset="/img/loading.gif" lazyload><br>    先从属性看，所有的属性均为private类型，其中type用于标识object类型，例如blob、tree、commit等，num用于表示标识号，在Git中，10644表示Blob型，04000表示Tree型，虽然在Jit中没有特别的作用，但我这里希望和Git统一格式，所有没有去除。Key用于表示经过hash之后的40位16进制数，无论是Blob、Tree还是Commit，都有对应的key值，它可以作为一个GitObject对象的ID。Value表示存储在各对象文件中的值，例如Blob的value表示文件内容，Tree的value表示一个表，其中每个数据条目对应一个blob或key的属性摘要，Commit的value值为该Commit的信息摘要，如下图所示：<br><img src="/img/java37.png" srcset="/img/loading.gif" lazyload><br>    同时我使用Get和Set方法，保持了数据的封装性，并规范了调用方式。<br><img src="/img/java38.png" srcset="/img/loading.gif" lazyload><br>    此外在GitObject中，我还定义了compressWrite方法，它可以进行数据的压缩写入，即value经过ZlibUtils压缩之后，序列化到本地。<br><img src="/img/java39.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Blob类"><a href="#Blob类" class="headerlink" title="Blob类"></a>Blob类</h1><p>        它是继承自GitObject。有三个构造函数，分别为空参数、传入File类型作为参数、传入String类型作为参数。结构图如下所示：</p>
+<p><img src="/img/java40.png" srcset="/img/loading.gif" lazyload><br>    空参数为默认的构造函数，使用super()，仅确定Type和Num的类型。<br><img src="/img/java41.png" srcset="/img/loading.gif" lazyload><br>    它表示从文件中构造一个Blob对象，即把File的内容读取出来，设置为Blob对象的value值，同时设置Path为它所在的工作区路径。<br><img src="/img/java42.png" srcset="/img/loading.gif" lazyload><br>    最后一个构造函数表示从Object文件夹下找到传入的key所对应的Blob文件，再由文件信息构建对象，它也是十分常用的方法。<br><img src="/img/java43.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Tree类"><a href="#Tree类" class="headerlink" title="Tree类"></a>Tree类</h1><p>        它也是继承自GitObject类，是树对象对应的类。<br>        结构图如下所示：</p>
+<p><img src="/img/java44.png" srcset="/img/loading.gif" lazyload><br>    定义一个类型为ArrayList<GitObject>的属性，存储当前树对象维护的一个列表，每一个元素都为Blob或Tree类型。同时设置它的get和set方法，如下图所示。<br><img src="/img/java45.png" srcset="/img/loading.gif" lazyload><br>    设置Tree类有三个构造方法，分别为传入空参数、TreeMap参数、Key参数。<br><img src="/img/java46.png" srcset="/img/loading.gif" lazyload><br>    上文已经介绍过使用TreeMap定义的indexTree，它是commit时由Index中的数据产生的虚拟结点，在这里作为参数传入Tree中，生成Tree对象。<br><img src="/img/java47.png" srcset="/img/loading.gif" lazyload><br>    这个构造函数传入的时key值，然后判断Object中的key值对应的文件是否存在，若存在就解压缩，设置value为解压缩之后的值，即原来的value值。然后调用同属于Tree类中的genTreeList方法，它的作用是从已存在的树对象中生成treeList：<br><img src="/img/java48.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Commit类"><a href="#Commit类" class="headerlink" title="Commit类"></a>Commit类</h1><p>        它用于描述提交对象的属性信息和行为。也继承自GitObject类，所以除了GitObject中的属性和方法之外，它还有增加了一些属性和方法，如下图所示。</p>
+<p><img src="/img/java49.png" srcset="/img/loading.gif" lazyload><br>    属性sha_tree表示当前的commit所指向树的sha1值，sha_parent表示父提交对象的sha1值，author表示作者的姓名和提交时间，committer表示当前提交者的姓名，它与作者可能不同，message表示提交者自行输入的提交信息，每次提交输入的信息最好不重复。同时我也定义了这几个属性的getter和setter方法。接下来是构造函数，Commit类中定义了三个构造函数，分别是无参、接收commitKey作为参数、接收Tree、author、commiter、message等信息作为参数。<br>    下图为接收commitKey作为参数的构造函数，它从序列化后，存放在Object文件夹下的名为commitKey的文件中提取信息，并由这些信息生成commit对象。<br><img src="/img/java50.png" srcset="/img/loading.gif" lazyload><br>    下图为接收Tree、author、commiter、message作为参数的构造函数，它从一个已经构建好的Tree对象中构建Commit对象，所以需要指定其它Commit对象所需要的各项属性。<br><img src="/img/java51.png" srcset="/img/loading.gif" lazyload><br>    除此之外，还有genKey方法，用于得到这次提交生成的commit对象hash值。<br><img src="/img/java52.png" srcset="/img/loading.gif" lazyload><br>    getLastCommit方法从HEAD文件中得到parent commit key<br><img src="/img/java53.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Repository类"><a href="#Repository类" class="headerlink" title="Repository类"></a>Repository类</h1><div class="code-wrapper"><pre><code class="hljs">这个类主要负责生成.jit文件夹，即内部的文件结构，如下图所示：
+</code></pre></div>
+<p><img src="/img/java54.png" srcset="/img/loading.gif" lazyload><br>    Repository类中的createRepo方法通过文件创建类FileCreation中的createDirectory和createFile方法完成文件层级结构的构建。<br><img src="/img/java55.png" srcset="/img/loading.gif" lazyload><br>    此外，还有utils包中的各个工具类、diff包中的Myers算法实现类，tmp包中的Index类等，限于篇幅关系在这里不做介绍，在代码中，我写了详细的注释，您可以通过阅读代码的方式了解这些类的结构和功能。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/01/Slice%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">Slice的内部实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://github.com/lovElaina" target="_blank" rel="nofollow noopener"><span>Aemon</span></a> <i class="iconfont icon-love"></i> <a href="https://wandering-witch.fandom.com/wiki/Elaina" target="_blank" rel="nofollow noopener"><span>Elaina</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

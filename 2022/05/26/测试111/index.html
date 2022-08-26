@@ -16,21 +16,21 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Slice的内部实现        这个方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。 123456789Array.prototype.slice &#x3D; function(start,end)&amp;#123;       var result &#x3D; new Array();       start &#x3D; start || 0;">
+    <meta name="description" content="hello 这是第二段">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Slice的内部实现">
-<meta property="og:url" content="http://example.com/2022/03/01/Slice%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:title" content="测试111">
+<meta property="og:url" content="http://example.com/2022/05/26/%E6%B5%8B%E8%AF%95111/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="Slice的内部实现        这个方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。 123456789Array.prototype.slice &#x3D; function(start,end)&amp;#123;       var result &#x3D; new Array();       start &#x3D; start || 0;">
+<meta property="og:description" content="hello 这是第二段">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-28T16:20:54.000Z">
-<meta property="article:modified_time" content="2022-03-03T16:20:21.300Z">
+<meta property="article:published_time" content="2022-05-26T03:18:27.000Z">
+<meta property="article:modified_time" content="2022-08-26T03:00:51.618Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="js">
+<meta property="article:tag" content="小程序">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Slice的内部实现 - Aemon&#39;s World</title>
+  <title>测试111 - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -176,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Slice的内部实现">
+            <span class="h2" id="subtitle" title="测试111">
               
             </span>
 
@@ -186,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-01 00:20" pubdate>
-        2022年3月1日 凌晨
+      <time datetime="2022-05-26 11:18" pubdate>
+        2022年5月26日 上午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      10 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      1 分钟
     </span>
   
 
@@ -235,23 +235,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Slice的内部实现</h1>
+            <h1 style="display: none">测试111</h1>
             
             <div class="markdown-body">
-              <h3 id="Slice的内部实现"><a href="#Slice的内部实现" class="headerlink" title="Slice的内部实现"></a>Slice的内部实现</h3><p>        这个方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">Array</span>.prototype.slice = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">start,end</span>)</span>&#123; <br>      <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(); <br>      start = start || <span class="hljs-number">0</span>; <br>      end = end || <span class="hljs-built_in">this</span>.length; <span class="hljs-comment">//this指向调用的对象，当用了call后，能够改变this的指向，也就是指向传进来的对象，这是关键 </span><br>      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = start; i &lt; end; i++)&#123; <br>           result.push(<span class="hljs-built_in">this</span>[i]); <br>      &#125; <br>      <span class="hljs-keyword">return</span> result; <br> &#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>附：slice与splice与split</strong></p>
-<p>1、splice(会修改原数组)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];<br><span class="hljs-keyword">var</span> bbb = arr.splice(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;world&quot;</span>)<br><span class="hljs-built_in">console</span>.log(arr) <br><span class="hljs-comment">//[ 1, 2, &#x27;hello&#x27;, &#x27;wo&#x27;, 5 ]</span><br><span class="hljs-built_in">console</span>.log(bbb)<br><span class="hljs-comment">//[ 3, 4 ]</span><br></code></pre></td></tr></table></figure>
-
-<p>2、slice(不会修改原数组)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];<br><span class="hljs-keyword">var</span> bbb = arr.slice(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>)<br><span class="hljs-built_in">console</span>.log(bbb)<br><span class="hljs-comment">//[3, 4]</span><br><br><span class="hljs-keyword">var</span> ccc = <span class="hljs-string">&quot;hello world&quot;</span><br><span class="hljs-keyword">var</span> ddd = ccc.slice(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>)<br><span class="hljs-built_in">console</span>.log(ddd)<br><span class="hljs-comment">//lo</span><br></code></pre></td></tr></table></figure>
-
-<p>3、split</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> str=<span class="hljs-string">&quot;How are you doing today?&quot;</span>;<br><span class="hljs-keyword">var</span> n=str.split(<span class="hljs-string">&quot; &quot;</span>);<br><span class="hljs-built_in">console</span>.log(n);<br><span class="hljs-comment">//[ &#x27;How&#x27;, &#x27;are&#x27;, &#x27;you&#x27;, &#x27;doing&#x27;, &#x27;today?&#x27; ]</span><br><span class="hljs-keyword">var</span> hh = <span class="hljs-string">&quot;hello world&quot;</span><br><span class="hljs-keyword">var</span> ss = hh.split(<span class="hljs-string">&quot;&quot;</span>)<br><span class="hljs-built_in">console</span>.log(ss)<br><span class="hljs-comment">//[&#x27;h&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;, &#x27;o&#x27;, &#x27; &#x27;, &#x27;w&#x27;, &#x27;o&#x27;, &#x27;r&#x27;, &#x27;l&#x27;, &#x27;d&#x27;]&#x27;</span><br></code></pre></td></tr></table></figure>
-
-
+              <p>hello</p>
+<p>这是第二段</p>
 
             </div>
             <hr>
@@ -262,7 +250,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/js/">js</a>
+                      <a class="hover-with-bg" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
                     
                   </div>
                 
@@ -279,18 +267,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/26/%E6%B5%8B%E8%AF%95111/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试111</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/26/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%20GlobalData/">
-                        <span class="hidden-mobile">微信小程序 GlobalData</span>
+                      <a href="/2022/03/01/Slice%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">Slice的内部实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

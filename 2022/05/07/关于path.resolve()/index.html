@@ -16,22 +16,22 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GET与POST的区别 最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。 GET在浏览器回退时是无害的，而POST会再次提交请求。 GET请求会被浏览器主动cache，而POST不会，除非手动设置。 GET请求只能进行url编码，而POST支持多种编码方式。 GET请求在URL中传送的参数是有长度限制的，而POST没有。 对参数的数据类型，GET只接受AS">
+    <meta name="description" content="关于path.resolve()学习webpack时遇到path.resolve()： 12345webpack.config.js:output: &amp;#123;        filename: &amp;#x27;[name].bundle.js&amp;#x27;,&#x2F;&#x2F;把一个路径或路径片段的序列解析为一个绝对路径        path: path.resolve(__dirname,&amp;#x27;dist&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GET与POST的区别">
-<meta property="og:url" content="http://example.com/2022/05/03/GET%E4%B8%8EPOST%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:title" content="关于path.resolve()">
+<meta property="og:url" content="http://example.com/2022/05/07/%E5%85%B3%E4%BA%8Epath.resolve()/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="GET与POST的区别 最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。 GET在浏览器回退时是无害的，而POST会再次提交请求。 GET请求会被浏览器主动cache，而POST不会，除非手动设置。 GET请求只能进行url编码，而POST支持多种编码方式。 GET请求在URL中传送的参数是有长度限制的，而POST没有。 对参数的数据类型，GET只接受AS">
+<meta property="og:description" content="关于path.resolve()学习webpack时遇到path.resolve()： 12345webpack.config.js:output: &amp;#123;        filename: &amp;#x27;[name].bundle.js&amp;#x27;,&#x2F;&#x2F;把一个路径或路径片段的序列解析为一个绝对路径        path: path.resolve(__dirname,&amp;#x27;dist&amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-02T17:12:37.000Z">
-<meta property="article:modified_time" content="2022-08-26T08:19:45.435Z">
+<meta property="article:published_time" content="2022-05-07T13:54:10.000Z">
+<meta property="article:modified_time" content="2022-09-03T03:45:30.683Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="计算机网络">
-<meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>GET与POST的区别 - Aemon&#39;s World</title>
+  <title>关于path.resolve() - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="GET与POST的区别">
+            <span class="h2" id="subtitle" title="关于path.resolve()">
               
             </span>
 
@@ -187,8 +187,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-03 01:12" pubdate>
-        2022年5月3日 凌晨
+      <time datetime="2022-05-07 21:54" pubdate>
+        2022年5月7日 晚上
       </time>
     </span>
   
@@ -198,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.4k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      12 分钟
     </span>
   
 
@@ -236,38 +236,24 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GET与POST的区别</h1>
+            <h1 style="display: none">关于path.resolve()</h1>
             
             <div class="markdown-body">
-              <h3 id="GET与POST的区别"><a href="#GET与POST的区别" class="headerlink" title="GET与POST的区别"></a>GET与POST的区别</h3><ul>
-<li>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。</li>
-<li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li>
-<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li>
-<li>GET请求只能进行url编码，而POST支持多种编码方式。</li>
-<li>GET请求在URL中传送的参数是有长度限制的，而POST没有。</li>
-<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li>
-<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li>
-</ul>
-<hr>
-<h3 id="本质区别"><a href="#本质区别" class="headerlink" title="本质区别"></a>本质区别</h3><p>  HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。</p>
-<p>  <strong>那么区别到底是什么呢？</strong></p>
-<ul>
-<li><strong>GET产生一个TCP数据包；POST产生两个TCP数据包。</strong></li>
-<li>从<strong>缓存</strong>的角度，GET 请求会被浏览器主动缓存下来，留下历史记录，而 POST 默认不会。</li>
-<li>从<strong>编码</strong>的角度，GET 只能进行 URL 编码，只能接收 ASCII 字符，而 POST 没有限制。</li>
-<li>从<strong>参数</strong>的角度，GET 一般放在 URL 中，因此不安全，POST 放在请求体中，更适合传输敏感信息。</li>
-<li>从<strong>幂等性</strong>的角度，<code>GET</code>是<strong>幂等</strong>的，而<code>POST</code>不是。(<code>幂等</code>表示执行相同的操作，结果也是相同的)</li>
-</ul>
-<p>  为什么GET产生一个TCP数据包；POST产生两个TCP数据包呢</p>
-<p>  对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
-<p>  而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<p>  也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
-<p>  因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p>
-<ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。  </li>
-</ol>
+              <h3 id="关于path-resolve"><a href="#关于path-resolve" class="headerlink" title="关于path.resolve()"></a>关于path.resolve()</h3><p>学习webpack时遇到path.resolve()：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript">webpack.config.js:<br>output: &#123;<br>        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].bundle.js&#x27;</span>,<span class="hljs-comment">//把一个路径或路径片段的序列解析为一个绝对路径</span><br>        <span class="hljs-attr">path</span>: path.resolve(__dirname,<span class="hljs-string">&#x27;dist&#x27;</span>)<br>    &#125;,<br></code></pre></td></tr></table></figure>
+
+<p>然后去看了node.js文档发现还是不理解，它的解释是:</p>
+<p>path.resolve() 方法会把一个路径或路径片段的序列解析为一个绝对路径。<br>给定的路径的序列是从右往左被处理的，后面每个 path 被依次解析，直到构造完成一个绝对路径。 例如，给定的路径片段的序列为：/foo、/bar、baz，则调用 path.resolve(‘/foo’, ‘/bar’, ‘baz’) 会返回 /bar/baz。</p>
+<p>给的例子有:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">path.resolve(<span class="hljs-string">&#x27;/foo/bar&#x27;</span>, <span class="hljs-string">&#x27;./baz&#x27;</span>);<br><span class="hljs-comment">// 返回: &#x27;/foo/bar/baz&#x27;</span><br><br>path.resolve(<span class="hljs-string">&#x27;/foo/bar&#x27;</span>, <span class="hljs-string">&#x27;/tmp/file/&#x27;</span>);<br><span class="hljs-comment">// 返回: &#x27;/tmp/file&#x27;</span><br><br>path.resolve(<span class="hljs-string">&#x27;wwwroot&#x27;</span>, <span class="hljs-string">&#x27;static_files/png/&#x27;</span>, <span class="hljs-string">&#x27;../gif/image.gif&#x27;</span>);<br><span class="hljs-comment">// 如果当前工作目录为 /home/myself/node，</span><br><span class="hljs-comment">// 则返回 &#x27;/home/myself/node/wwwroot/static_files/gif/image.gif&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>我的理解是像拼接字符串一样从右到左将参数拼成一个绝对路径，但是给出的每一个例子都完全不符合这个理解，然后看了一篇path的join和resolve的使用区别后的理解可以解释这些例子：</p>
+<p>path.resolve([…paths])里的每个参数都类似在当前目录执行一个cd操作，从左到右执行，返回的是最后的当前目录，这样理解才和文档中的例子对上号，例如：<br>path.resolve(‘/foo/bar’,’./baz’);相当于：</p>
+<p><code>cd /foo/bar //此时当前路径为 /foo/bar cd ./baz //此时路径为 /foo/bar/baz</code></p>
+<p>path.resolve(‘/foo/bar’, ‘/tmp/file/‘);相当于：</p>
+<p><code>cd /foo/bar //此时路径为 /foo/bar cd /tmp/file/ //此时路径为 /tmp/file</code></p>
+<p>path.resolve(‘wwwroot’, ‘static_files/png/‘, ‘../gif/image.gif’);// 如果当前工作目录为 /home/myself/node，相当于：</p>
+<p><code>cd wwwroot //此时路径为/home/myself/node/wwwroot cd static_files/png/ //此时路径为/home/myself/node/wwwroot/static_files/png/ cd ../gif/image.gif //这里用cd是不对的，此时路径为/home/myself/node/wwwroot/static_files/gif/image.gif</code></p>
 
             </div>
             <hr>
@@ -278,9 +264,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                      <a class="hover-with-bg" href="/tags/nodejs/">nodejs</a>
                     
-                      <a class="hover-with-bg" href="/tags/HTTP/">HTTP</a>
+                      <a class="hover-with-bg" href="/tags/webpack/">webpack</a>
                     
                   </div>
                 
@@ -297,12 +283,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于JAVA中的集合类ArrayDeque</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/12/JIT-%E4%BD%BF%E7%94%A8JAVA%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Git/">
-                        <span class="hidden-mobile">JIT-使用JAVA实现一个简单的Git</span>
+                      <a href="/2022/05/03/GET%E8%AF%B7%E6%B1%82%E4%B8%8EPOST%E8%AF%B7%E6%B1%82/">
+                        <span class="hidden-mobile">GET请求与POST请求</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

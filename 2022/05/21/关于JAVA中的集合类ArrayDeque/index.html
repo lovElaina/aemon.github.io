@@ -16,23 +16,22 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="新建文件夹——搭建前端UI组件库目前市面上有很多功能强大且完善的组件库供我们使用，比如基于React的antd，material（个人更喜欢这个），基于Vue的elementUI、iView等。 为啥我们想做一个自己的组件库呢？有大佬给出的观点如下：  我们使用第三方组件库搭建一个企业级应用是完全没有问题的，但是另一方面，随着我们对用户体验以及网站性能的要求越来越高，流量及金钱，速度即王道，对于专">
+    <meta name="description" content="关于JAVA中的集合类ArrayDequeArrayDeque类是双端队列的线性实现类ArrayDeque是采用数组方式实现的双端队列。ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。无容量大小限制，容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新建文件夹——搭建前端UI组件库">
-<meta property="og:url" content="http://example.com/2022/01/10/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E2%80%94%E2%80%94%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AFUI%E7%BB%84%E4%BB%B6%E5%BA%93/index.html">
+<meta property="og:title" content="关于JAVA中的集合类ArrayDeque">
+<meta property="og:url" content="http://example.com/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="新建文件夹——搭建前端UI组件库目前市面上有很多功能强大且完善的组件库供我们使用，比如基于React的antd，material（个人更喜欢这个），基于Vue的elementUI、iView等。 为啥我们想做一个自己的组件库呢？有大佬给出的观点如下：  我们使用第三方组件库搭建一个企业级应用是完全没有问题的，但是另一方面，随着我们对用户体验以及网站性能的要求越来越高，流量及金钱，速度即王道，对于专">
+<meta property="og:description" content="关于JAVA中的集合类ArrayDequeArrayDeque类是双端队列的线性实现类ArrayDeque是采用数组方式实现的双端队列。ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。无容量大小限制，容">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/aemonUI.jpg">
-<meta property="article:published_time" content="2022-01-10T13:54:35.000Z">
-<meta property="article:modified_time" content="2022-01-10T14:13:07.801Z">
+<meta property="article:published_time" content="2022-05-21T06:54:09.000Z">
+<meta property="article:modified_time" content="2022-08-30T11:01:06.436Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="UI component">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="双端队列">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/aemonUI.jpg">
   
   
-  <title>新建文件夹——搭建前端UI组件库 - Aemon&#39;s World</title>
+  <title>关于JAVA中的集合类ArrayDeque - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="新建文件夹——搭建前端UI组件库">
+            <span class="h2" id="subtitle" title="关于JAVA中的集合类ArrayDeque">
               
             </span>
 
@@ -188,8 +187,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-10 21:54" pubdate>
-        2022年1月10日 晚上
+      <time datetime="2022-05-21 14:54" pubdate>
+        2022年5月21日 下午
       </time>
     </span>
   
@@ -199,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      498 字
+      1.5k 字
     </span>
   
 
@@ -208,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      13 分钟
     </span>
   
 
@@ -237,20 +236,13 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">新建文件夹——搭建前端UI组件库</h1>
+            <h1 style="display: none">关于JAVA中的集合类ArrayDeque</h1>
             
             <div class="markdown-body">
-              <h3 id="新建文件夹——搭建前端UI组件库"><a href="#新建文件夹——搭建前端UI组件库" class="headerlink" title="新建文件夹——搭建前端UI组件库"></a>新建文件夹——搭建前端UI组件库</h3><p>目前市面上有很多功能强大且完善的组件库供我们使用，比如基于React的antd，material（个人更喜欢这个），基于Vue的elementUI、iView等。</p>
-<p>为啥我们想做一个自己的组件库呢？有大佬给出的观点如下：</p>
-<blockquote>
-<p>我们使用第三方组件库搭建一个企业级应用是完全没有问题的，但是另一方面，随着我们对用户体验以及网站性能的要求越来越高，流量及金钱，速度即王道，对于专注于做C端的企业来说，尽可能的减少用户等待才能留住更多的用户，比如我们在某宝，某东上买一个商品，结果我们花了一分钟商品列表还没有出来（形容的有点夸张），这种情况下客户可有可能直接选择某拼了。很明显像ant-design和elementUI这样的组件不适合做C端产品，因为体积太大了，除非用高性能服务器或者其他方式弥补。</p>
-</blockquote>
-<p>嗯，虽然我们目前还不会接触到这样大规模的商城页面开发，但要面向未来嘛，另外通过做组件库，也能学到不少东西（吧）</p>
-<p>我喜欢前端，其实说到底，喜欢的是设计，是界面，所以做组件库，真是到我心坎里了w</p>
-<p>搞一个属于自己风格的组件库，想想就刺激</p>
-<p>开个头吧，已经真 · 新建文件夹了 ↓</p>
-<p><img src="/img/aemonUI.jpg" srcset="/img/loading.gif" lazyload alt="我是图片"></p>
-<p>哈哈哈哈，话不多说，冲~~</p>
+              <h3 id="关于JAVA中的集合类ArrayDeque"><a href="#关于JAVA中的集合类ArrayDeque" class="headerlink" title="关于JAVA中的集合类ArrayDeque"></a>关于JAVA中的集合类ArrayDeque</h3><h4 id="ArrayDeque类是双端队列的线性实现类"><a href="#ArrayDeque类是双端队列的线性实现类" class="headerlink" title="ArrayDeque类是双端队列的线性实现类"></a>ArrayDeque类是双端队列的线性实现类</h4><p>ArrayDeque是采用数组方式实现的双端队列。<br>ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。<br>ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。<br>ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。<br>无容量大小限制，容量按需增长。<br>非线程安全队列，无同步策略，不支持多线程安全访问。<br>具有fail-fast特性，不能存储null值，支持双向迭代器遍历。</p>
+<h4 id="常用方法如下："><a href="#常用方法如下：" class="headerlink" title="常用方法如下："></a>常用方法如下：</h4><div class="table-box"><table border="1" align="center"><tbody><tr><th>类型</th><th>方法</th><th>作用</th></tr><tr><th rowspan="4">添加元素</th><td><a href="#one" target="_self">public void addFirst(E e)</a></td><td>在数组前面添加元素</td></tr><tr><td><a href="#two" target="_self">public void addLast(E e)</a></td><td>在数组后面添加元素</td></tr><tr><td><a href="#three" target="_self">public boolean offerFirst(E e)</a></td><td> 在数组前面添加元素，并返回是否添加成功</td></tr><tr><td><a href="#four" target="_self">public boolean offerLast</a></td><td>在数组后面添加元素，并返回是否添加成功</td></tr><tr><th rowspan="6">删除元素</th><td><a href="#five" target="_self">public E pollFirst()</a></td><td>删除第一个元素，并返回删除元素的值，如果元素为null，将返回null</td></tr><tr><td><a href="#six" target="_self">public E removeFirst()</a></td><td>删除第一个元素，并返回删除元素的值,如果元素为null，将抛出异常</td></tr><tr><td><a href="#seven" target="_self">public E pollLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将返回null</td></tr><tr><td><a href="#eight" target="_self">public E removeLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将抛出异常</td></tr><tr><td><a href="#nine" target="_self">public boolean removeFirstOccurrence(Object o)</a></td><td>删除第一次出现的指定元素</td></tr><tr><td><a href="#ten" target="_self">public boolean removeLastOccurrence(Object o)</a></td><td>删除最后一次出现的指定元素</td></tr><tr><th rowspan="2">获取元素</th><td><a href="#eleven" target="_self">public E getFirst()</a></td><td>获取第一个元素,如果没有将抛出异常</td></tr><tr><td><a href="#twelve" target="_self">public E getLast()</a></td><td>获取最后一个元素，如果没有将抛出异常</td></tr><tr><th rowspan="6">队列操作</th><td><a href="#thirteen" target="_self">public boolean add(E e)</a></td><td>在队列尾部添加一个元素</td></tr><tr><td><a href="#forteen" target="_self">public boolean offer(E e)</a></td><td>在队列尾部添加一个元素，并返回是否成功</td></tr><tr><td><a href="#fifteen" target="_self">public E remove()</a></td><td>删除队列中第一个元素，并返回该元素的值，如果元素为null，将抛出异常(其实底层调用的是removeFirst())</td></tr><tr><td><a href="#sixteen" target="_self">public E poll()</a></td><td>删除队列中第一个元素，并返回该元素的值,如果元素为null，将返回null(其实调用的是pollFirst())</td></tr><tr><td><a href="#seventeen" target="_self">public E element()</a></td><td>获取第一个元素，如果没有将抛出异常</td></tr><tr><td><a href="#eighteen" target="_self">public E peek()</a></td><td>获取第一个元素，如果返回null</td></tr><tr><th rowspan="2">栈操作</th><td><a href="#ninteen" target="_self">public void push(E e)</a></td><td>栈顶添加一个元素</td></tr><tr><td><a href="#twenty" target="_self">public E pop()</a></td><td>移除栈顶元素,如果栈顶没有元素将抛出异常</td></tr><tr><th rowspan="9">其他</th><td><a href="#twentyone" target="_self">public int size()</a></td><td>获取队列中元素个数</td></tr><tr><td><a href="#twentytwo" target="_self">public boolean isEmpty()</a></td><td>判断队列是否为空</td></tr><tr><td><a href="#twentythree" target="_self">public Iterator iterator()</a></td><td>迭代器，从前向后迭代</td></tr><tr><td><a href="#twentyfour" target="_self">public Iterator descendingIterator()</a></td><td>迭代器，从后向前迭代</td></tr><tr><td><a href="#twentyfive" target="_self">public boolean contains(Object o)</a></td><td>判断队列中是否存在该元素</td></tr><tr><td><a href="#twentysix" target="_self">public Object[] toArray()</a></td><td>转成数组</td></tr><tr><td><a href="#twentyseven" target="_self">public T[] toArray(T[] a)</a></td><td>转成a数组常</td></tr><tr><td><a href="#twentyeight" target="_self">public void clear()</a></td><td>清空队列</td></tr><tr><td><a href="#twentynine" target="_self">public ArrayDeque clone()</a></td><td>克隆(复制)一个新的队列</td></tr></tbody></table></div>
+
+
 
             </div>
             <hr>
@@ -261,7 +253,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/UI-component/">UI component</a>
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/">双端队列</a>
                     
                   </div>
                 
@@ -278,15 +272,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/11/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%9B%9E%E9%A1%BETypeScript%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+                      <a href="/2022/06/12/%E4%B8%80%E9%81%93%E5%85%B3%E4%BA%8EPromise%E5%BA%94%E7%94%A8%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一篇文章回顾TypeScript基本用法</span>
+                        <span class="hidden-mobile">一道关于Promise应用的面试题</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2022/05/07/%E5%85%B3%E4%BA%8Epath.resolve()/">
+                        <span class="hidden-mobile">关于path.resolve()</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

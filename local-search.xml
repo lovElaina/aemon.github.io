@@ -4,11 +4,72 @@
   
   
   <entry>
-    <title>GET与POST的区别</title>
-    <link href="/2022/05/03/GET%E4%B8%8EPOST%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <url>/2022/05/03/GET%E4%B8%8EPOST%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <title>一道关于Promise应用的面试题</title>
+    <link href="/2022/06/12/%E4%B8%80%E9%81%93%E5%85%B3%E4%BA%8EPromise%E5%BA%94%E7%94%A8%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <url>/2022/06/12/%E4%B8%80%E9%81%93%E5%85%B3%E4%BA%8EPromise%E5%BA%94%E7%94%A8%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     
-    <content type="html"><![CDATA[<h3 id="GET与POST的区别"><a href="#GET与POST的区别" class="headerlink" title="GET与POST的区别"></a>GET与POST的区别</h3><ul><li>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。</li><li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li><li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li><li>GET请求只能进行url编码，而POST支持多种编码方式。</li><li>GET请求在URL中传送的参数是有长度限制的，而POST没有。</li><li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li><li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li></ul><hr><h3 id="本质区别"><a href="#本质区别" class="headerlink" title="本质区别"></a>本质区别</h3><p>  HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。</p><p>  <strong>那么区别到底是什么呢？</strong></p><ul><li><strong>GET产生一个TCP数据包；POST产生两个TCP数据包。</strong></li><li>从<strong>缓存</strong>的角度，GET 请求会被浏览器主动缓存下来，留下历史记录，而 POST 默认不会。</li><li>从<strong>编码</strong>的角度，GET 只能进行 URL 编码，只能接收 ASCII 字符，而 POST 没有限制。</li><li>从<strong>参数</strong>的角度，GET 一般放在 URL 中，因此不安全，POST 放在请求体中，更适合传输敏感信息。</li><li>从<strong>幂等性</strong>的角度，<code>GET</code>是<strong>幂等</strong>的，而<code>POST</code>不是。(<code>幂等</code>表示执行相同的操作，结果也是相同的)</li></ul><p>  为什么GET产生一个TCP数据包；POST产生两个TCP数据包呢</p><p>  对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p><p>  而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p><p>  也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p><p>  因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p><ol><li>GET与POST都有自己的语义，不能随便混用。</li><li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li><li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。  </li></ol>]]></content>
+    <content type="html"><![CDATA[<h3 id="一道关于Promise应用的面试题"><a href="#一道关于Promise应用的面试题" class="headerlink" title="一道关于Promise应用的面试题"></a>一道关于Promise应用的面试题</h3><p>        题目：红灯三秒亮一次，绿灯一秒亮一次，黄灯2秒亮一次；如何让三个灯不断交替重复亮灯？（用Promse实现）</p><p>        三个亮灯函数已经存在：</p><figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">red</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;red&#x27;</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">green</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;green&#x27;</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">yellow</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;yellow&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure><p>        首先我们需要一个函数来实现时间控制：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> tic = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">timmer, cb</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>            cb();<br>            resolve();<br>        &#125;, timmer);<br>    &#125;);<br>&#125;;<br></code></pre></td></tr></table></figure><p>    如果把问题简化一下，只需要一个周期，那么使用Promise应该这样写：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> step = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">def</span>) </span>&#123;<br>     def.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; <br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">3000</span>, red);<br> &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; <br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">2000</span>, green);<br> &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; <br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">1000</span>, yellow);<br> &#125;);<br>&#125;<br></code></pre></td></tr></table></figure><p>        现在一个周期已经有了，剩下的问题是如何让他无限循环。我们很容易想到<code>for</code> <code>while</code> <code>do-while</code>这三个，比如：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> step = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">def</span>) </span>&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>        def.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">3000</span>, red);<br>        &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">2000</span>, green);<br>        &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>            <span class="hljs-keyword">return</span> tic(<span class="hljs-number">1000</span>, yellow);<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>        如果你是这样想的，那么就成功踩了坑！这道题的第二个考查点就是setTimeout相关的异步队列会挂起直到主进程空闲。如果使用while无限循环，主进程永远不会空闲，setTimeout的函数也永远不会执行。</p><p>正确的解决方法就是这道题的第三个考查点——递归！！！解决方案如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>)</span>&#123;resolve();&#125;);<br><span class="hljs-keyword">var</span> step = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">def</span>) </span>&#123;<br>    def.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> tic(<span class="hljs-number">3000</span>, red);<br>    &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> tic(<span class="hljs-number">2000</span>, green);<br>    &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> tic(<span class="hljs-number">1000</span>, yellow);<br>    &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        step(def);<br>    &#125;);<br>&#125;<br>step(d)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Promise</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于JAVA中的集合类ArrayDeque</title>
+    <link href="/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/"/>
+    <url>/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/</url>
+    
+    <content type="html"><![CDATA[<h3 id="关于JAVA中的集合类ArrayDeque"><a href="#关于JAVA中的集合类ArrayDeque" class="headerlink" title="关于JAVA中的集合类ArrayDeque"></a>关于JAVA中的集合类ArrayDeque</h3><h4 id="ArrayDeque类是双端队列的线性实现类"><a href="#ArrayDeque类是双端队列的线性实现类" class="headerlink" title="ArrayDeque类是双端队列的线性实现类"></a>ArrayDeque类是双端队列的线性实现类</h4><p>ArrayDeque是采用数组方式实现的双端队列。<br>ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。<br>ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。<br>ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。<br>无容量大小限制，容量按需增长。<br>非线程安全队列，无同步策略，不支持多线程安全访问。<br>具有fail-fast特性，不能存储null值，支持双向迭代器遍历。</p><h4 id="常用方法如下："><a href="#常用方法如下：" class="headerlink" title="常用方法如下："></a>常用方法如下：</h4><div class="table-box"><table border="1" align="center"><tbody><tr><th>类型</th><th>方法</th><th>作用</th></tr><tr><th rowspan="4">添加元素</th><td><a href="#one" target="_self">public void addFirst(E e)</a></td><td>在数组前面添加元素</td></tr><tr><td><a href="#two" target="_self">public void addLast(E e)</a></td><td>在数组后面添加元素</td></tr><tr><td><a href="#three" target="_self">public boolean offerFirst(E e)</a></td><td> 在数组前面添加元素，并返回是否添加成功</td></tr><tr><td><a href="#four" target="_self">public boolean offerLast</a></td><td>在数组后面添加元素，并返回是否添加成功</td></tr><tr><th rowspan="6">删除元素</th><td><a href="#five" target="_self">public E pollFirst()</a></td><td>删除第一个元素，并返回删除元素的值，如果元素为null，将返回null</td></tr><tr><td><a href="#six" target="_self">public E removeFirst()</a></td><td>删除第一个元素，并返回删除元素的值,如果元素为null，将抛出异常</td></tr><tr><td><a href="#seven" target="_self">public E pollLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将返回null</td></tr><tr><td><a href="#eight" target="_self">public E removeLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将抛出异常</td></tr><tr><td><a href="#nine" target="_self">public boolean removeFirstOccurrence(Object o)</a></td><td>删除第一次出现的指定元素</td></tr><tr><td><a href="#ten" target="_self">public boolean removeLastOccurrence(Object o)</a></td><td>删除最后一次出现的指定元素</td></tr><tr><th rowspan="2">获取元素</th><td><a href="#eleven" target="_self">public E getFirst()</a></td><td>获取第一个元素,如果没有将抛出异常</td></tr><tr><td><a href="#twelve" target="_self">public E getLast()</a></td><td>获取最后一个元素，如果没有将抛出异常</td></tr><tr><th rowspan="6">队列操作</th><td><a href="#thirteen" target="_self">public boolean add(E e)</a></td><td>在队列尾部添加一个元素</td></tr><tr><td><a href="#forteen" target="_self">public boolean offer(E e)</a></td><td>在队列尾部添加一个元素，并返回是否成功</td></tr><tr><td><a href="#fifteen" target="_self">public E remove()</a></td><td>删除队列中第一个元素，并返回该元素的值，如果元素为null，将抛出异常(其实底层调用的是removeFirst())</td></tr><tr><td><a href="#sixteen" target="_self">public E poll()</a></td><td>删除队列中第一个元素，并返回该元素的值,如果元素为null，将返回null(其实调用的是pollFirst())</td></tr><tr><td><a href="#seventeen" target="_self">public E element()</a></td><td>获取第一个元素，如果没有将抛出异常</td></tr><tr><td><a href="#eighteen" target="_self">public E peek()</a></td><td>获取第一个元素，如果返回null</td></tr><tr><th rowspan="2">栈操作</th><td><a href="#ninteen" target="_self">public void push(E e)</a></td><td>栈顶添加一个元素</td></tr><tr><td><a href="#twenty" target="_self">public E pop()</a></td><td>移除栈顶元素,如果栈顶没有元素将抛出异常</td></tr><tr><th rowspan="9">其他</th><td><a href="#twentyone" target="_self">public int size()</a></td><td>获取队列中元素个数</td></tr><tr><td><a href="#twentytwo" target="_self">public boolean isEmpty()</a></td><td>判断队列是否为空</td></tr><tr><td><a href="#twentythree" target="_self">public Iterator iterator()</a></td><td>迭代器，从前向后迭代</td></tr><tr><td><a href="#twentyfour" target="_self">public Iterator descendingIterator()</a></td><td>迭代器，从后向前迭代</td></tr><tr><td><a href="#twentyfive" target="_self">public boolean contains(Object o)</a></td><td>判断队列中是否存在该元素</td></tr><tr><td><a href="#twentysix" target="_self">public Object[] toArray()</a></td><td>转成数组</td></tr><tr><td><a href="#twentyseven" target="_self">public T[] toArray(T[] a)</a></td><td>转成a数组常</td></tr><tr><td><a href="#twentyeight" target="_self">public void clear()</a></td><td>清空队列</td></tr><tr><td><a href="#twentynine" target="_self">public ArrayDeque clone()</a></td><td>克隆(复制)一个新的队列</td></tr></tbody></table></div>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+      <tag>双端队列</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于path.resolve()</title>
+    <link href="/2022/05/07/%E5%85%B3%E4%BA%8Epath.resolve()/"/>
+    <url>/2022/05/07/%E5%85%B3%E4%BA%8Epath.resolve()/</url>
+    
+    <content type="html"><![CDATA[<h3 id="关于path-resolve"><a href="#关于path-resolve" class="headerlink" title="关于path.resolve()"></a>关于path.resolve()</h3><p>学习webpack时遇到path.resolve()：</p><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript">webpack.config.js:<br>output: &#123;<br>        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].bundle.js&#x27;</span>,<span class="hljs-comment">//把一个路径或路径片段的序列解析为一个绝对路径</span><br>        <span class="hljs-attr">path</span>: path.resolve(__dirname,<span class="hljs-string">&#x27;dist&#x27;</span>)<br>    &#125;,<br></code></pre></td></tr></table></figure><p>然后去看了node.js文档发现还是不理解，它的解释是:</p><p>path.resolve() 方法会把一个路径或路径片段的序列解析为一个绝对路径。<br>给定的路径的序列是从右往左被处理的，后面每个 path 被依次解析，直到构造完成一个绝对路径。 例如，给定的路径片段的序列为：/foo、/bar、baz，则调用 path.resolve(‘/foo’, ‘/bar’, ‘baz’) 会返回 /bar/baz。</p><p>给的例子有:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">path.resolve(<span class="hljs-string">&#x27;/foo/bar&#x27;</span>, <span class="hljs-string">&#x27;./baz&#x27;</span>);<br><span class="hljs-comment">// 返回: &#x27;/foo/bar/baz&#x27;</span><br><br>path.resolve(<span class="hljs-string">&#x27;/foo/bar&#x27;</span>, <span class="hljs-string">&#x27;/tmp/file/&#x27;</span>);<br><span class="hljs-comment">// 返回: &#x27;/tmp/file&#x27;</span><br><br>path.resolve(<span class="hljs-string">&#x27;wwwroot&#x27;</span>, <span class="hljs-string">&#x27;static_files/png/&#x27;</span>, <span class="hljs-string">&#x27;../gif/image.gif&#x27;</span>);<br><span class="hljs-comment">// 如果当前工作目录为 /home/myself/node，</span><br><span class="hljs-comment">// 则返回 &#x27;/home/myself/node/wwwroot/static_files/gif/image.gif&#x27;</span><br></code></pre></td></tr></table></figure><p>我的理解是像拼接字符串一样从右到左将参数拼成一个绝对路径，但是给出的每一个例子都完全不符合这个理解，然后看了一篇path的join和resolve的使用区别后的理解可以解释这些例子：</p><p>path.resolve([…paths])里的每个参数都类似在当前目录执行一个cd操作，从左到右执行，返回的是最后的当前目录，这样理解才和文档中的例子对上号，例如：<br>path.resolve(‘/foo/bar’,’./baz’);相当于：</p><p><code>cd /foo/bar //此时当前路径为 /foo/bar cd ./baz //此时路径为 /foo/bar/baz</code></p><p>path.resolve(‘/foo/bar’, ‘/tmp/file/‘);相当于：</p><p><code>cd /foo/bar //此时路径为 /foo/bar cd /tmp/file/ //此时路径为 /tmp/file</code></p><p>path.resolve(‘wwwroot’, ‘static_files/png/‘, ‘../gif/image.gif’);// 如果当前工作目录为 /home/myself/node，相当于：</p><p><code>cd wwwroot //此时路径为/home/myself/node/wwwroot cd static_files/png/ //此时路径为/home/myself/node/wwwroot/static_files/png/ cd ../gif/image.gif //这里用cd是不对的，此时路径为/home/myself/node/wwwroot/static_files/gif/image.gif</code></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>nodejs</tag>
+      
+      <tag>webpack</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>GET请求与POST请求</title>
+    <link href="/2022/05/03/GET%E8%AF%B7%E6%B1%82%E4%B8%8EPOST%E8%AF%B7%E6%B1%82/"/>
+    <url>/2022/05/03/GET%E8%AF%B7%E6%B1%82%E4%B8%8EPOST%E8%AF%B7%E6%B1%82/</url>
+    
+    <content type="html"><![CDATA[<h3 id="GET请求与POST请求"><a href="#GET请求与POST请求" class="headerlink" title="GET请求与POST请求"></a>GET请求与POST请求</h3><ul><li>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。</li><li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li><li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li><li>GET请求只能进行url编码，而POST支持多种编码方式。</li><li>GET请求在URL中传送的参数是有长度限制的，而POST没有。</li><li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li><li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li></ul><hr><h3 id="本质区别"><a href="#本质区别" class="headerlink" title="本质区别"></a>本质区别</h3><p>  HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。</p><p>  <strong>那么区别到底是什么呢？</strong></p><ul><li><strong>GET产生一个TCP数据包；POST产生两个TCP数据包。</strong></li><li>从<strong>缓存</strong>的角度，GET 请求会被浏览器主动缓存下来，留下历史记录，而 POST 默认不会。</li><li>从<strong>编码</strong>的角度，GET 只能进行 URL 编码，只能接收 ASCII 字符，而 POST 没有限制。</li><li>从<strong>参数</strong>的角度，GET 一般放在 URL 中，因此不安全，POST 放在请求体中，更适合传输敏感信息。</li><li>从<strong>幂等性</strong>的角度，<code>GET</code>是<strong>幂等</strong>的，而<code>POST</code>不是。(<code>幂等</code>表示执行相同的操作，结果也是相同的)</li></ul><p>  为什么GET产生一个TCP数据包；POST产生两个TCP数据包呢</p><p>  对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p><p>  而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p><p>  也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p><p>  因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p><ol><li>GET与POST都有自己的语义，不能随便混用。</li><li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li><li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。  </li></ol>]]></content>
     
     
     
@@ -17,6 +78,29 @@
       <tag>计算机网络</tag>
       
       <tag>HTTP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Webpack中的Loader和Plugin</title>
+    <link href="/2022/04/21/Webpack%E4%B8%AD%E7%9A%84Loader%E5%92%8CPlugin/"/>
+    <url>/2022/04/21/Webpack%E4%B8%AD%E7%9A%84Loader%E5%92%8CPlugin/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Webpack中的Loader和Plugin"><a href="#Webpack中的Loader和Plugin" class="headerlink" title="Webpack中的Loader和Plugin"></a>Webpack中的Loader和Plugin</h3><p><code>Loader</code> 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。<br>因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。</p><p><code>Plugin</code> 就是插件，基于事件流框架 <code>Tapable</code>，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。</p><p><code>Loader</code> 在 module.rules 中配置，作为模块的解析规则，类型为数组。每一项都是一个 Object，内部包含了 test(类型文件)、loader、options (参数)等属性。</p><p><code>Plugin</code> 在 plugins 中单独配置，类型为数组，每一项是一个 Plugin 的实例，参数都通过构造函数传入。</p><h4 id="Loader和Plugin在Webpack构建流程中的活动"><a href="#Loader和Plugin在Webpack构建流程中的活动" class="headerlink" title="Loader和Plugin在Webpack构建流程中的活动"></a>Loader和Plugin在Webpack构建流程中的活动</h4><p><code>初始化</code>：启动构建，读取与合并配置参数，加载 Plugin，实例化 Compiler</p><p><code>编译</code>：从 Entry 出发，针对每个 Module 串行调用对应的 Loader 去翻译文件的内容，再找到该 Module 依赖的 Module，递归地进行编译处理</p><p><code>输出</code>：将编译后的 Module 组合成 Chunk，将 Chunk 转换成文件，输出到文件系统中</p><p><strong>在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果。</strong></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>webpack</tag>
+      
+      <tag>Loader</tag>
+      
+      <tag>Plugin</tag>
       
     </tags>
     
@@ -327,38 +411,6 @@
       <tag>UI component</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>hello,zyc</title>
-    <link href="/2022/01/09/hello-zyc/"/>
-    <url>/2022/01/09/hello-zyc/</url>
-    
-    <content type="html"><![CDATA[<p>This is my first article in hexo !<br>Hello, nice to meet you, I am zyc.</p><h2 id="and-I-want-to-have-a-try"><a href="#and-I-want-to-have-a-try" class="headerlink" title="and I want to have a try"></a>and I want to have a try</h2><figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello world!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure><p>About me: <a href="https://github.com/lovesatoriforever">Github</a></p><h2 id="Have-fun"><a href="#Have-fun" class="headerlink" title="Have fun!"></a>Have fun!</h2>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>first</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2022/01/09/hello-world/"/>
-    <url>/2022/01/09/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
     
   </entry>
   

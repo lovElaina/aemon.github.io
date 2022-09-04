@@ -16,22 +16,22 @@
   <meta name="author" content="Aemon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关于JAVA中的集合类ArrayDequeArrayDeque类是双端队列的线性实现类ArrayDeque是采用数组方式实现的双端队列。ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。无容量大小限制，容">
+    <meta name="description" content="解决显示绑定遇到的绑定丢失的情况先看一段代码： 123456789101112function sayHi()&amp;#123;    console.log(&amp;#x27;Hello,&amp;#x27;, this.name)&amp;#125;var person &#x3D; &amp;#123;    name: &amp;#x27;Rocky&amp;#x27;,    sayHi: sayHi&amp;#125;var name &#x3D; &amp;#x27;w">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于JAVA中的集合类ArrayDeque">
-<meta property="og:url" content="http://example.com/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/index.html">
+<meta property="og:title" content="解决显示绑定遇到的绑定丢失的情况">
+<meta property="og:url" content="http://example.com/2022/05/17/%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E7%BB%91%E5%AE%9A%E9%81%87%E5%88%B0%E7%9A%84%E7%BB%91%E5%AE%9A%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%83%85%E5%86%B5/index.html">
 <meta property="og:site_name" content="Aemon&#39;s World">
-<meta property="og:description" content="关于JAVA中的集合类ArrayDequeArrayDeque类是双端队列的线性实现类ArrayDeque是采用数组方式实现的双端队列。ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。无容量大小限制，容">
+<meta property="og:description" content="解决显示绑定遇到的绑定丢失的情况先看一段代码： 123456789101112function sayHi()&amp;#123;    console.log(&amp;#x27;Hello,&amp;#x27;, this.name)&amp;#125;var person &#x3D; &amp;#123;    name: &amp;#x27;Rocky&amp;#x27;,    sayHi: sayHi&amp;#125;var name &#x3D; &amp;#x27;w">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-21T06:54:09.000Z">
-<meta property="article:modified_time" content="2022-08-30T11:01:06.436Z">
+<meta property="article:published_time" content="2022-05-17T04:19:03.000Z">
+<meta property="article:modified_time" content="2022-09-04T06:48:57.354Z">
 <meta property="article:author" content="Aemon">
-<meta property="article:tag" content="JAVA">
-<meta property="article:tag" content="双端队列">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="this">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>关于JAVA中的集合类ArrayDeque - Aemon&#39;s World</title>
+  <title>解决显示绑定遇到的绑定丢失的情况 - Aemon&#39;s World</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="关于JAVA中的集合类ArrayDeque">
+            <span class="h2" id="subtitle" title="解决显示绑定遇到的绑定丢失的情况">
               
             </span>
 
@@ -187,8 +187,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-21 14:54" pubdate>
-        2022年5月21日 下午
+      <time datetime="2022-05-17 12:19" pubdate>
+        2022年5月17日 中午
       </time>
     </span>
   
@@ -198,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      773 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      7 分钟
     </span>
   
 
@@ -236,13 +236,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于JAVA中的集合类ArrayDeque</h1>
+            <h1 style="display: none">解决显示绑定遇到的绑定丢失的情况</h1>
             
             <div class="markdown-body">
-              <h3 id="关于JAVA中的集合类ArrayDeque"><a href="#关于JAVA中的集合类ArrayDeque" class="headerlink" title="关于JAVA中的集合类ArrayDeque"></a>关于JAVA中的集合类ArrayDeque</h3><h4 id="ArrayDeque类是双端队列的线性实现类"><a href="#ArrayDeque类是双端队列的线性实现类" class="headerlink" title="ArrayDeque类是双端队列的线性实现类"></a>ArrayDeque类是双端队列的线性实现类</h4><p>ArrayDeque是采用数组方式实现的双端队列。<br>ArrayDeque的出队入队是通过头尾指针循环，利用数组实现的。<br>ArrayDeque容量不足时是会扩容的，每次扩容容量增加一倍。<br>ArrayDeque可以直接作为栈使用。当用作栈时，性能优于Stack，当用于队列时，性能优于LinkedList。<br>无容量大小限制，容量按需增长。<br>非线程安全队列，无同步策略，不支持多线程安全访问。<br>具有fail-fast特性，不能存储null值，支持双向迭代器遍历。</p>
-<h4 id="常用方法如下："><a href="#常用方法如下：" class="headerlink" title="常用方法如下："></a>常用方法如下：</h4><div class="table-box"><table border="1" align="center"><tbody><tr><th>类型</th><th>方法</th><th>作用</th></tr><tr><th rowspan="4">添加元素</th><td><a href="#one" target="_self">public void addFirst(E e)</a></td><td>在数组前面添加元素</td></tr><tr><td><a href="#two" target="_self">public void addLast(E e)</a></td><td>在数组后面添加元素</td></tr><tr><td><a href="#three" target="_self">public boolean offerFirst(E e)</a></td><td> 在数组前面添加元素，并返回是否添加成功</td></tr><tr><td><a href="#four" target="_self">public boolean offerLast</a></td><td>在数组后面添加元素，并返回是否添加成功</td></tr><tr><th rowspan="6">删除元素</th><td><a href="#five" target="_self">public E pollFirst()</a></td><td>删除第一个元素，并返回删除元素的值，如果元素为null，将返回null</td></tr><tr><td><a href="#six" target="_self">public E removeFirst()</a></td><td>删除第一个元素，并返回删除元素的值,如果元素为null，将抛出异常</td></tr><tr><td><a href="#seven" target="_self">public E pollLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将返回null</td></tr><tr><td><a href="#eight" target="_self">public E removeLast()</a></td><td>删除最后一个元素，并返回删除元素的值，如果为null，将抛出异常</td></tr><tr><td><a href="#nine" target="_self">public boolean removeFirstOccurrence(Object o)</a></td><td>删除第一次出现的指定元素</td></tr><tr><td><a href="#ten" target="_self">public boolean removeLastOccurrence(Object o)</a></td><td>删除最后一次出现的指定元素</td></tr><tr><th rowspan="2">获取元素</th><td><a href="#eleven" target="_self">public E getFirst()</a></td><td>获取第一个元素,如果没有将抛出异常</td></tr><tr><td><a href="#twelve" target="_self">public E getLast()</a></td><td>获取最后一个元素，如果没有将抛出异常</td></tr><tr><th rowspan="6">队列操作</th><td><a href="#thirteen" target="_self">public boolean add(E e)</a></td><td>在队列尾部添加一个元素</td></tr><tr><td><a href="#forteen" target="_self">public boolean offer(E e)</a></td><td>在队列尾部添加一个元素，并返回是否成功</td></tr><tr><td><a href="#fifteen" target="_self">public E remove()</a></td><td>删除队列中第一个元素，并返回该元素的值，如果元素为null，将抛出异常(其实底层调用的是removeFirst())</td></tr><tr><td><a href="#sixteen" target="_self">public E poll()</a></td><td>删除队列中第一个元素，并返回该元素的值,如果元素为null，将返回null(其实调用的是pollFirst())</td></tr><tr><td><a href="#seventeen" target="_self">public E element()</a></td><td>获取第一个元素，如果没有将抛出异常</td></tr><tr><td><a href="#eighteen" target="_self">public E peek()</a></td><td>获取第一个元素，如果返回null</td></tr><tr><th rowspan="2">栈操作</th><td><a href="#ninteen" target="_self">public void push(E e)</a></td><td>栈顶添加一个元素</td></tr><tr><td><a href="#twenty" target="_self">public E pop()</a></td><td>移除栈顶元素,如果栈顶没有元素将抛出异常</td></tr><tr><th rowspan="9">其他</th><td><a href="#twentyone" target="_self">public int size()</a></td><td>获取队列中元素个数</td></tr><tr><td><a href="#twentytwo" target="_self">public boolean isEmpty()</a></td><td>判断队列是否为空</td></tr><tr><td><a href="#twentythree" target="_self">public Iterator iterator()</a></td><td>迭代器，从前向后迭代</td></tr><tr><td><a href="#twentyfour" target="_self">public Iterator descendingIterator()</a></td><td>迭代器，从后向前迭代</td></tr><tr><td><a href="#twentyfive" target="_self">public boolean contains(Object o)</a></td><td>判断队列中是否存在该元素</td></tr><tr><td><a href="#twentysix" target="_self">public Object[] toArray()</a></td><td>转成数组</td></tr><tr><td><a href="#twentyseven" target="_self">public T[] toArray(T[] a)</a></td><td>转成a数组常</td></tr><tr><td><a href="#twentyeight" target="_self">public void clear()</a></td><td>清空队列</td></tr><tr><td><a href="#twentynine" target="_self">public ArrayDeque clone()</a></td><td>克隆(复制)一个新的队列</td></tr></tbody></table></div>
+              <h3 id="解决显示绑定遇到的绑定丢失的情况"><a href="#解决显示绑定遇到的绑定丢失的情况" class="headerlink" title="解决显示绑定遇到的绑定丢失的情况"></a>解决显示绑定遇到的绑定丢失的情况</h3><p>先看一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello,&#x27;</span>, <span class="hljs-built_in">this</span>.name)<br>&#125;<br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Rocky&#x27;</span>,<br>    <span class="hljs-attr">sayHi</span>: sayHi<br>&#125;<br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;will&#x27;</span><br><span class="hljs-keyword">var</span> Hi = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fn</span>) </span>&#123;<br>    fn()<br>&#125;<br>Hi.call(person, person.sayHi)<br></code></pre></td></tr></table></figure>
 
+<p>输出的结果是 <code>Hello, will</code></p>
+<p>原因很简单，<code>Hi.call(person, person.sayHi)</code>的确是将<code>this</code>指向<code>person</code>了。但是在执行<code>fn</code>的时候，相当于直接调用了<code>sayHi</code>方法(<code>person.sayHi</code>已经被赋值给<code>fn</code>了，隐式绑定也丢了)，没有指定<code>this</code>的值，对应的是默认绑定。</p>
+<p>如果我们希望绑定不会丢失，要怎么做？很简单，调用<code>fn</code>的时候，<strong>再给它显式绑定。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello,&#x27;</span>, <span class="hljs-built_in">this</span>.name)<br>&#125;<br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Rocky&#x27;</span>,<br>    <span class="hljs-attr">sayHi</span>: sayHi<br>&#125;<br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;will&#x27;</span><br><span class="hljs-keyword">var</span> Hi = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fn</span>) </span>&#123;<br>    fn.call(<span class="hljs-built_in">this</span>)<br>&#125;<br>Hi.call(person, person.sayHi)<br></code></pre></td></tr></table></figure>
 
+<p>此时，输出的结果为: <code>Hello, Rocky</code></p>
+<p>因为<code>person</code>被绑定到<code>Hi</code>函数中的<code>this</code>上，<code>fn</code>又使用了<code>call(this)</code>将这个对象绑定给了<code>sayHi</code>的函数。这时，<code>sayHi</code>中的<code>this</code>指向的就是<code>person</code>对象。</p>
 
             </div>
             <hr>
@@ -253,9 +259,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/">双端队列</a>
+                      <a class="hover-with-bg" href="/tags/this/">this</a>
                     
                   </div>
                 
@@ -272,9 +278,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/11/%E4%B8%A4%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%93%E5%87%BA%E9%A2%98/">
+                      <a href="/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">两道有趣的代码输出题</span>
+                        <span class="hidden-mobile">关于JAVA中的集合类ArrayDeque</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -282,8 +288,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/17/%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E7%BB%91%E5%AE%9A%E9%81%87%E5%88%B0%E7%9A%84%E7%BB%91%E5%AE%9A%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%83%85%E5%86%B5/">
-                        <span class="hidden-mobile">解决显示绑定遇到的绑定丢失的情况</span>
+                      <a href="/2022/05/07/%E5%85%B3%E4%BA%8Epath.resolve()/">
+                        <span class="hidden-mobile">关于path.resolve()</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

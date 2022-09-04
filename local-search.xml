@@ -23,6 +23,27 @@
   
   
   <entry>
+    <title>两道有趣的代码输出题</title>
+    <link href="/2022/06/11/%E4%B8%A4%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%93%E5%87%BA%E9%A2%98/"/>
+    <url>/2022/06/11/%E4%B8%A4%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%93%E5%87%BA%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h3 id="两道有趣的代码输出题"><a href="#两道有趣的代码输出题" class="headerlink" title="两道有趣的代码输出题"></a>两道有趣的代码输出题</h3><p>先看一道简单的题目：</p><figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> obj = &#123;<br>  <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">foo</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">b</span>) </span>&#123;<br>    b = b || <span class="hljs-built_in">this</span>.a<br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">c</span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a + b + c)<br>    &#125;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span><br><span class="hljs-keyword">var</span> obj2 = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">3</span> &#125;<br>obj.foo(a).call(obj2, <span class="hljs-number">1</span>)<br>obj.foo.call(obj2)(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure><p>开始调用<code>obj.foo(a)</code>将<code>2</code>传入<code>foo</code>函数并赋值给型参<code>b</code>，并且由于闭包的原因，使得匿名函数内能访问到<code>b</code>，之后调用匿名函数的时候，用<code>call()</code>改变了<code>this</code>的指向，使得匿名函数内<code>this.a</code>为<code>3</code>，并传入最后一个参数<code>1</code>，所以第一行输出的应该是<code>3 + 2 + 1</code>，也就是<code>6</code>。</p><p>而第二行，<code>obj.foo.call(obj2)</code>这里是将<code>foo</code>函数内的<code>this</code>指向了<code>obj2</code>，同时并没有传递任何参数，所以<code>b</code>开始是<code>undefined</code>的，但是又因为有一句<code>b = b || this.a</code>，使得<code>b</code>变为了<code>3</code>；同时最后一段代码<code>(1)</code>，是在调用匿名函数，且和这个匿名函数内的<code>this</code>应该是指向<code>window</code>的，因此输出为<code>2 + 3 + 1</code>，为<code>6</code>。</p><p>再看一道简单的题目（this这块没什么难题）</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-function"><span class="hljs-title">aaa</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;   <span class="hljs-comment">// 1.普通函数的setTimeout</span><br>      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>)     <br>      &#125;)<br>      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>)    <br>      &#125;)<br>    &#125;)<br><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;      <span class="hljs-comment">// 2.箭头函数的setTimeout</span><br>      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>)   <br>      &#125;)<br>      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>)   <br>      &#125;)<br>    &#125;)<br>  &#125;<br>&#125;<br>obj.aaa()<br></code></pre></td></tr></table></figure><p>第一个普通函数的<code>setTimeout</code>：this指向<code>window</code></p><p>普通函数的<code>子setTimeout</code>：默认绑定，this指向全局对象<code>window</code></p><p>箭头函数的<code>子setTimeout</code>：指向上层作用域的this，上层作用域的this就是<code>window</code></p><p>第二个箭头函数的<code>setTimeout</code>：往上层作用域<code>aaa</code>找this，因为<code>aaa</code>是被<code>obj</code>调用的，<code>aaa</code>方法的this就是指向<code>obj</code>，所以this指向<code>obj</code></p><p>普通函数的<code>子setTimeout</code>：默认绑定，this指向全局对象<code>window</code></p><p>箭头函数的<code>子setTimeout</code>：指向上层作用域的this，上层作用域的this就是<code>obj</code></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JavaScript</tag>
+      
+      <tag>this</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关于JAVA中的集合类ArrayDeque</title>
     <link href="/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/"/>
     <url>/2022/05/21/%E5%85%B3%E4%BA%8EJAVA%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BBArrayDeque/</url>
@@ -36,6 +57,27 @@
       <tag>JAVA</tag>
       
       <tag>双端队列</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>解决显示绑定遇到的绑定丢失的情况</title>
+    <link href="/2022/05/17/%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E7%BB%91%E5%AE%9A%E9%81%87%E5%88%B0%E7%9A%84%E7%BB%91%E5%AE%9A%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%83%85%E5%86%B5/"/>
+    <url>/2022/05/17/%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E7%BB%91%E5%AE%9A%E9%81%87%E5%88%B0%E7%9A%84%E7%BB%91%E5%AE%9A%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%83%85%E5%86%B5/</url>
+    
+    <content type="html"><![CDATA[<h3 id="解决显示绑定遇到的绑定丢失的情况"><a href="#解决显示绑定遇到的绑定丢失的情况" class="headerlink" title="解决显示绑定遇到的绑定丢失的情况"></a>解决显示绑定遇到的绑定丢失的情况</h3><p>先看一段代码：</p><figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello,&#x27;</span>, <span class="hljs-built_in">this</span>.name)<br>&#125;<br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Rocky&#x27;</span>,<br>    <span class="hljs-attr">sayHi</span>: sayHi<br>&#125;<br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;will&#x27;</span><br><span class="hljs-keyword">var</span> Hi = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fn</span>) </span>&#123;<br>    fn()<br>&#125;<br>Hi.call(person, person.sayHi)<br></code></pre></td></tr></table></figure><p>输出的结果是 <code>Hello, will</code></p><p>原因很简单，<code>Hi.call(person, person.sayHi)</code>的确是将<code>this</code>指向<code>person</code>了。但是在执行<code>fn</code>的时候，相当于直接调用了<code>sayHi</code>方法(<code>person.sayHi</code>已经被赋值给<code>fn</code>了，隐式绑定也丢了)，没有指定<code>this</code>的值，对应的是默认绑定。</p><p>如果我们希望绑定不会丢失，要怎么做？很简单，调用<code>fn</code>的时候，<strong>再给它显式绑定。</strong></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello,&#x27;</span>, <span class="hljs-built_in">this</span>.name)<br>&#125;<br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Rocky&#x27;</span>,<br>    <span class="hljs-attr">sayHi</span>: sayHi<br>&#125;<br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;will&#x27;</span><br><span class="hljs-keyword">var</span> Hi = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fn</span>) </span>&#123;<br>    fn.call(<span class="hljs-built_in">this</span>)<br>&#125;<br>Hi.call(person, person.sayHi)<br></code></pre></td></tr></table></figure><p>此时，输出的结果为: <code>Hello, Rocky</code></p><p>因为<code>person</code>被绑定到<code>Hi</code>函数中的<code>this</code>上，<code>fn</code>又使用了<code>call(this)</code>将这个对象绑定给了<code>sayHi</code>的函数。这时，<code>sayHi</code>中的<code>this</code>指向的就是<code>person</code>对象。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JavaScript</tag>
+      
+      <tag>this</tag>
       
     </tags>
     

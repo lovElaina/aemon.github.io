@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>ES6中箭头函数的this与普通函数的this</title>
+    <link href="/2022/07/11/ES6%E4%B8%AD%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84this%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84this/"/>
+    <url>/2022/07/11/ES6%E4%B8%AD%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84this%E4%B8%8E%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84this/</url>
+    
+    <content type="html"><![CDATA[<h3 id="ES6中箭头函数的this与普通函数的this"><a href="#ES6中箭头函数的this与普通函数的this" class="headerlink" title="ES6中箭头函数的this与普通函数的this"></a>ES6中箭头函数的this与普通函数的this</h3><h5 id="看几个例子："><a href="#看几个例子：" class="headerlink" title="看几个例子："></a>看几个例子：</h5><p>（1）hello是全局函数，没有直接调用它的对象，也没有使用严格模式，this指向window</p><figure class="highlight scss"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs scss">function hello() &#123; <br>  console<span class="hljs-selector-class">.log</span>(this);  <span class="hljs-comment">// window </span><br>&#125;  <br>hello();<br><br></code></pre></td></tr></table></figure><p>（2）hello是全局函数，没有直接调用它的对象，但指定了严格模式（‘use strict’），this指向undefined</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss">function hello() &#123; <br>   &#x27;use strict&#x27;;<br>   console<span class="hljs-selector-class">.log</span>(this);  <span class="hljs-comment">// undefined</span><br>&#125;  <br>hello();<br></code></pre></td></tr></table></figure><p>（3）hello直接调用者是obj，第一个this指向obj，setTimeout里匿名函数没有直接调用者，this指向window</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;<br>    <span class="hljs-attr">num</span>: <span class="hljs-number">10</span>,<br>   <span class="hljs-attr">hello</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);    <span class="hljs-comment">// obj</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);    <span class="hljs-comment">// window</span><br>    &#125;);<br>   &#125;    <br>&#125;<br>obj.hello();<br></code></pre></td></tr></table></figure><p>（4）hello直接调用者是obj，第一个this指向obj，setTimeout箭头函数，this指向最近的函数的this指向，即也是obj</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;<br>    <span class="hljs-attr">num</span>: <span class="hljs-number">10</span>,<br>   <span class="hljs-attr">hello</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);    <span class="hljs-comment">// obj</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);    <span class="hljs-comment">// obj</span><br>    &#125;);<br>   &#125;    <br>&#125;<br>obj.hello();<br></code></pre></td></tr></table></figure><p>（5）diameter是普通函数，里面的this指向直接调用它的对象obj。perimeter是箭头函数，this应该指向上下文函数this的指向，这里上下文没有函数对象，就默认为window，而window里面没有radius这个属性，就返回为NaN。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-attr">radius</span>: <span class="hljs-number">10</span>,  <br>  <span class="hljs-function"><span class="hljs-title">diameter</span>(<span class="hljs-params"></span>)</span> &#123;    <br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.radius * <span class="hljs-number">2</span><br>  &#125;,  <br>  <span class="hljs-attr">perimeter</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-number">2</span> * <span class="hljs-built_in">Math</span>.PI * <span class="hljs-built_in">this</span>.radius<br>&#125;<br><span class="hljs-built_in">console</span>.log(obj.diameter())    <span class="hljs-comment">// 20</span><br><span class="hljs-built_in">console</span>.log(obj.perimeter())    <span class="hljs-comment">// NaN</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>this</tag>
+      
+      <tag>ES6</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>一道关于Promise应用的面试题</title>
     <link href="/2022/06/12/%E4%B8%80%E9%81%93%E5%85%B3%E4%BA%8EPromise%E5%BA%94%E7%94%A8%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <url>/2022/06/12/%E4%B8%80%E9%81%93%E5%85%B3%E4%BA%8EPromise%E5%BA%94%E7%94%A8%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
@@ -36,6 +57,25 @@
       <tag>JavaScript</tag>
       
       <tag>this</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>js获取对象属性的方法总结</title>
+    <link href="/2022/06/02/%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <url>/2022/06/02/%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    
+    <content type="html"><![CDATA[<h3 id="js获取对象属性的方法总结"><a href="#js获取对象属性的方法总结" class="headerlink" title="js获取对象属性的方法总结"></a>js获取对象属性的方法总结</h3><table><thead><tr><th align="center">方法</th><th>返回值</th><th>备注</th></tr></thead><tbody><tr><td align="center"><code>Object.keys/values/entries</code></td><td>对象自身的可枚举字符串属性</td><td></td></tr><tr><td align="center"><code>Object.getOwnPropertyNames(obj)</code></td><td>对象自身的所有可枚举、不可枚举的字符串属性</td><td></td></tr><tr><td align="center"><code>Object.getOwnPropertySymbols(obj)</code></td><td>对象自身的所有可枚举、不可枚举的 Symbol 属性</td><td></td></tr><tr><td align="center"><code>Reflect.ownKeys(obj)</code></td><td>对象自身的所有可枚举、不可枚举的字符串属性、Symbol 属性。</td><td>等同于 <code>Object.getOwnPropertyNames(obj)</code> +  <code>Object.getOwnPropertySymbols(obj)</code>  的效果。</td></tr><tr><td align="center"><code>for (let prop in obj) &#123;&#125;</code></td><td>对象自身及所在原型链上的所有可枚举字符串属性</td><td></td></tr></tbody></table>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JavaScript</tag>
       
     </tags>
     
